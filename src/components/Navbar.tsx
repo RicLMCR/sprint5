@@ -2,10 +2,10 @@ import { useState } from "react";
 import '../App.css';
 
 // Pass data to app.tsx
-const Navbar = () => {
+const Navbar = ({ setData, data }: any) => {
     const [userName, setUsername] = useState("");
     const [userPassword, setPassword] = useState("");
-    const [data, setData] = useState<any>("");
+
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
@@ -14,7 +14,6 @@ const Navbar = () => {
             .then((res) => res.json())
             .then((data) => setData(data));
 
-        console.log(data);
     };
 
     // Post request to create an account..

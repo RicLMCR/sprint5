@@ -40,12 +40,11 @@
 
 .Nav-bar {
   background-color: #282c34;
-  min-height: 5vh;
+  height: 150px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
 }
 
@@ -53,16 +52,28 @@
 .h1-nav {
   color: #61dafb;
   float: left;
-  margin-right: 750px;
-  font-size: 30px;
+  margin-right: 900px;
+  font-size: 40px;
+  margin-top: 50px;
 }
 
 .input-nav {
   float: right;
+  padding: 5px 15px;
+  background: #ccc;
+  border: 0 none;
+  cursor: pointer;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  border-color: black;
 }
 
 .button-nav {
   float: right;
+  background-color: #06eded94;
+  width: 170px;
+  border-radius: 5px;
+  border-color: black;
 }
 
 .form-group {
@@ -71,4 +82,5 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 30px;
 }
