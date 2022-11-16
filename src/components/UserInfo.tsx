@@ -3,16 +3,6 @@ import "./css/userInfo.css";
 
 const UserInfo = ({ toAllowance }: any) => {
 
-
-  if (toAllowance) {
-    //   setAllowance(toAllowance.timeOff.PTO.allowance);
-    console.log("sick days are:", toAllowance.timeOff.PTO.allowance);
-    //   console.log(allowance);
-  } else {
-    console.log("still waiting");
-  }
-
-
   return (
     <div className="userInfoContainer">
         {
