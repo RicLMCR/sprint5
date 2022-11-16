@@ -20,6 +20,7 @@ const Navbar = ({ setData, data }: any) => {
   const handleLogOut = () => {
     // setData();
     console.log("logout");
+    setData("");
   };
 
   return (
@@ -27,9 +28,7 @@ const Navbar = ({ setData, data }: any) => {
       <div className="img-div">
         <img className="logo-nav" src={logo} alt="logo" />
       </div>
-      <h1 className="h1-nav">
-        Paid Time Off <p>Logged in: {data.userName} </p>
-      </h1>
+      <h1 className="h1-nav">Paid Time Off Logged in: {data.userName}</h1>
       <form onSubmit={handleSubmit}>
         {data ? (
           <div>
