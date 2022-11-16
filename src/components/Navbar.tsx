@@ -1,6 +1,6 @@
 import { useState } from "react";
 import '../App.css';
-
+import logo from '../store86-logo.png';
 // Pass data to app.tsx
 const Navbar = ({ setData, data }: any) => {
     const [userName, setUsername] = useState("");
@@ -20,8 +20,11 @@ const Navbar = ({ setData, data }: any) => {
 
     return (
         <div className="Nav-bar">
+            <div className="img-div">
+                <img className="logo-nav" src={logo} alt="logo" />
+            </div>
+            <h1 className="h1-nav">Paid Time Off  <p>Logged in: {data.userName} </p></h1>
             <form onSubmit={handleSubmit}>
-                <h1 className="h1-nav">Paid Time Off</h1>
                 <div className="form-group">
                     <label>
                         <input placeholder="User name" className="input-nav" type="text" value={userName} onChange={(event) => setUsername(event.target.value)} />
@@ -33,7 +36,6 @@ const Navbar = ({ setData, data }: any) => {
                     <input className="button-nav" type="submit" value="Register" />
                 </div>
             </form>
-            <p>{data.userName}</p>
         </div>
     );
 }
