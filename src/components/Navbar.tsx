@@ -3,10 +3,9 @@ import "../App.css";
 import { getFetch } from "./FetchReq";
 
 // Pass data to app.tsx
-const Navbar = () => {
-  const [userName, setUsername] = useState("");
-  const [userPassword, setPassword] = useState("");
-  const [data, setData] = useState<any>("");
+const Navbar = ({ setData, data }: any) => {
+    const [userName, setUsername] = useState("");
+    const [userPassword, setPassword] = useState("");
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -14,9 +13,8 @@ const Navbar = () => {
     fetch(`/api/users/userName/${userName}/userPassword/${userPassword}`)
       .then((res) => res.json())
       .then((data) => setData(data));
+    };
 
-    console.log(data);
-  };
 
   // Post request to create an account..
 
