@@ -1,7 +1,7 @@
 import { useState } from "react";
-import "../App.css";
-import logo from "../store86-logo.png";
-import NavModal from "./NavModal";
+import "../../App.css";
+import logo from "../../store86-logo.png";
+import NavModal from "./NavModal"
 
 //Prop Interface
 interface MyProps {
@@ -15,7 +15,6 @@ const Navbar = ({ setData, data }: MyProps) => {
 
   //logout
   const handleLogOut = () => {
-    // setData();
     console.log("logout");
     setData("");
   };
