@@ -3,10 +3,6 @@ const mongooseSchema = require('mongoose');
 const Schema = mongooseSchema.Schema;
 
 const userSchema = new Schema({
-    userId: {
-        type: Number,
-        required: true
-    },
     userName: {
         type: String,
         required: true
@@ -21,22 +17,22 @@ const userSchema = new Schema({
     },
     userRole: {
         type: String,
-        required: false
+        required: true
     },
     timeOff: {
         PTO: {
             allowance: {
                 type: Number,
-                required: true
+                required: false
             },
             available: {
                 type: Number,
-                required: true
+                required: false
             },
             booked: {
                 type: Number,
-                required: true
-            }
+                required: false
+            },
         },
         sickDays: {
             type: Number,
@@ -51,3 +47,4 @@ const userModel = mongooseSchema.model('User', userSchema);
 module.exports = {
     userModel
 }
+
