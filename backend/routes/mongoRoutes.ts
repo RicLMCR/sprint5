@@ -1,6 +1,7 @@
+import express from 'express';
 const expressRoutes = require('express');
-const { getUser } = require('../controllers/controllers');
 
+const { getUser, createUser } = require('../controllers/controllers');
 
 const router = expressRoutes.Router();
 
@@ -9,6 +10,7 @@ const router = expressRoutes.Router();
 router.get('/users/userName/:userName/userPassword/:userPassword', getUser);
 
 // Create new user
+router.post('/users', createUser)
 
 // Create holiday booking for user
 

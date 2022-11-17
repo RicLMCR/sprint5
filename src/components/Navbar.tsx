@@ -5,6 +5,7 @@ import logo from "../store86-logo.png";
 const Navbar = ({ setData, data }: any) => {
     const [userName, setUsername] = useState("");
     const [userPassword, setPassword] = useState("");
+    const [userCreated, setUserCreated] = useState(false);
 
     //login
     const handleSubmit = (e: any) => {
@@ -13,14 +14,28 @@ const Navbar = ({ setData, data }: any) => {
         fetch(`/api/users/userName/${userName}/userPassword/${userPassword}`)
             .then((res) => res.json())
             .then((data) => setData(data));
-        setUsername("");
+
     };
 
-    // Post register data to database
-    const handleRegister = (e: any) => {
+    // Post request to create new user
+    const handleCreate = (e: any) => {
         e.preventDefault();
-    };
 
+        fetch("/api/users/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                userName: userName,
+                userPassword: userPassword,
+            }),
+        })
+            .then((res) => res.json())
+            .then((data) => console.log(data));
+        setUserCreated(true);
+
+    };
 
     //logout
     const handleLogOut = () => {
@@ -61,10 +76,13 @@ const Navbar = ({ setData, data }: any) => {
                             />
                         </label>
                         <input className="button-nav" type="submit" value="Log in" />
-                        <input className="button-nav" type="submit" value="Register" onClick={handleRegister} />
+                        <input className="button-nav" type="submit" value="Register" onClick={handleCreate} />
+                        {userCreated ? <p className="user-created-p">User created</p> : null}
+
                     </div>
                 )}
             </form>
+
         </div>
     );
 };

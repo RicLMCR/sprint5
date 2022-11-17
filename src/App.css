@@ -92,3 +92,7 @@
   max-width: 300px;
   max-height: 300px;
 }
+
+.user-created-p {
+  color: green;
+}
