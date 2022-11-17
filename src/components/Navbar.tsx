@@ -10,6 +10,7 @@ const Navbar = ({ setData, data }: any) => {
     //login
     const handleSubmit = (e: any) => {
         e.preventDefault();
+        // Check if user exists
 
         fetch(`/api/users/userName/${userName}/userPassword/${userPassword}`)
             .then((res) => res.json())
@@ -29,6 +30,15 @@ const Navbar = ({ setData, data }: any) => {
             body: JSON.stringify({
                 userName: userName,
                 userPassword: userPassword,
+                userRole: 'Employee',
+                timeOff: {
+                    PTO: {
+                        allowance: 95,
+                        available: 95,
+                        booked: 0,
+                    },
+                    sickDays: 7
+                }
             }),
         })
             .then((res) => res.json())

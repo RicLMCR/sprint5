@@ -3,10 +3,6 @@ const mongooseSchema = require('mongoose');
 const Schema = mongooseSchema.Schema;
 
 const userSchema = new Schema({
-    userId: {
-        type: Number,
-        required: false
-    },
     userName: {
         type: String,
         required: true
@@ -21,7 +17,7 @@ const userSchema = new Schema({
     },
     userRole: {
         type: String,
-        required: false
+        required: true
     },
     timeOff: {
         PTO: {
