@@ -1,7 +1,9 @@
 const expressRoutes = require('express');
 const { getUser } = require('../controllers/controllers');
 
+
 const router = expressRoutes.Router();
+
 
 // Get user
 router.get('/users/userName/:userName/userPassword/:userPassword', getUser);

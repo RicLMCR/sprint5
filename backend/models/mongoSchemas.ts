@@ -5,7 +5,7 @@ const Schema = mongooseSchema.Schema;
 const userSchema = new Schema({
     userId: {
         type: Number,
-        required: true
+        required: false
     },
     userName: {
         type: String,
@@ -27,16 +27,16 @@ const userSchema = new Schema({
         PTO: {
             allowance: {
                 type: Number,
-                required: true
+                required: false
             },
             available: {
                 type: Number,
-                required: true
+                required: false
             },
             booked: {
                 type: Number,
-                required: true
-            }
+                required: false
+            },
         },
         sickDays: {
             type: Number,
