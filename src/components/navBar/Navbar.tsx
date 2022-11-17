@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../../App.css";
 import logo from "../../store86-logo.png";
-import NavModal from "./NavModal"
+import NavModal from "./NavModal";
 
 //Prop Interface
 interface MyProps {

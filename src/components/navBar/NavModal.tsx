@@ -22,6 +22,36 @@ const NavModal = ({
   // States
   const [userName, setUsername] = useState<string>("");
   const [userPassword, setPassword] = useState<string>("");
+  const [userCreated, setUserCreated] = useState<any>("");
+
+  // Post request to create new user
+  const handleCreate = (e: any) => {
+    e.preventDefault();
+
+    fetch("/api/users/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userName: userName,
+        userPassword: userPassword,
+        userRole: 'Employee',
+        timeOff: {
+          PTO: {
+            allowance: 95,
+            available: 95,
+            booked: 0,
+          },
+          sickDays: 7
+        }
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+    setUserCreated(true);
+  };
+
 
   //Submit Function
   const handleSubmit = (e: any) => {
@@ -60,7 +90,8 @@ const NavModal = ({
               />
             </label>
             <input className="button-nav" type="submit" value="Log in" />
-            <input className="button-nav" type="submit" value="Register" />
+            <input className="button-nav" type="submit" value="Register" onClick={handleCreate} />
+            {userCreated ? <p className="user-created-p">User created</p> : null}
           </div>
         )}
       </form>
