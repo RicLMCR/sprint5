@@ -1,10 +1,11 @@
 import { useState } from "react";
 import '../App.css';
 import logo from '../store86-logo.png';
+
 // Pass data to app.tsx
 const Navbar = ({ setData, data }: any) => {
-    const [userName, setUsername] = useState("");
-    const [userPassword, setPassword] = useState("");
+    const [userName, setUsername] = useState<string>("");
+    const [userPassword, setPassword] = useState<string>("");
 
 
     const handleSubmit = (e: any) => {
@@ -13,7 +14,6 @@ const Navbar = ({ setData, data }: any) => {
         fetch(`/api/users/userName/${userName}/userPassword/${userPassword}`)
             .then((res) => res.json())
             .then((data) => setData(data));
-
     };
 
     // Post request to create an account..
