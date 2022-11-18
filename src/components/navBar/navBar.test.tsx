@@ -1,5 +1,5 @@
 import React from "react";
-import { create } from "react-test-renderer";
+// import { create } from "react-test-renderer";
 import { render, screen, cleanup } from "@testing-library/react";
 import Navbar from "./Navbar";
 
