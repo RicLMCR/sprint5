@@ -1,6 +1,16 @@
 import { Request, Response } from 'express';
 const { userModel } = require('../models/mongoSchemas');
 
+function convert(dates: any) {
+    var date = new Date(dates),
+        mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+        day = ("0" + date.getDate()).slice(-2);
+    console.log([day, mnth, date.getFullYear()].join("-"));
+    return ([day, mnth, date.getFullYear()].join("-"));
+}
+convert('Wed Nov 02 2022 15:56:51 GMT+0000');
+
+
 const getUser = async (req: Request, res: Response): Promise<Response> => {
     const { userName, userPassword } = req.params;
     const user = await userModel.findOne({ userName, userPassword });
