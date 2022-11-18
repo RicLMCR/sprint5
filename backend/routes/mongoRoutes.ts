@@ -8,6 +8,7 @@ router.get('/users/userName/:userName/userPassword/:userPassword', getUser);
 
 // Create new user
 router.post('/users', createUser);
+
 // Create holiday booking for user
 
 // Get all bookings for user
