@@ -4,7 +4,7 @@ import "./App.css";
 import Navbar from "./components/navBar/Navbar";
 import { useState } from "react";
 import UserInfo from "./components/userInfo/UserInfo";
-import BookTO from "./components/bookTO/BookTO";
+import BookTO from "./components/bookTO/BookTO2";
 
 function App() {
   const [data, setData] = useState<any>("");
