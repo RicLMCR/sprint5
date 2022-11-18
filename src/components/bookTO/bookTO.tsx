@@ -11,7 +11,7 @@ const BookTO = ({ bookingArray, setBookingArray }: MyProps) => {
   const [date, setDate] = useState<any>();
 
   //! variables
-  const bookings: any[] = [];
+  //   const bookings: any[] = [];
 
   //! Handle Submit
   const handleSubmit = (event: any) => {
@@ -21,24 +21,8 @@ const BookTO = ({ bookingArray, setBookingArray }: MyProps) => {
   //!HandleFormSubmit
   const handleFormSubmit = (event: any) => {
     event.preventDefault();
-    // if (date && hours) {
-    //   bookings.push(date, hours);
-    //   console.log(bookings);
-    // } else {
-    //   console.log("pick right parameters");
-    // }
-    // if (bookings) {
-    //   setBookingArray([bookingArray, bookings]);
-    //   console.log(bookingArray, "I AM BOOKING");
-    //   // if (bookingArray[0] === undefined) {
-    //   //   bookingArray[0].splice(1);
-    //   // }
-    // } else {
-    //   console.log("Date not found");
-    // }
     if (date && hours) {
-      setBookingArray([bookingArray, hours, date]);
-      // setBookingArray(date, hours, [...bookingArray]);
+      setBookingArray([...bookingArray, { date: date, hours: hours }]);
 
       console.log(bookingArray);
     } else {
@@ -74,7 +58,7 @@ const BookTO = ({ bookingArray, setBookingArray }: MyProps) => {
         </button>
       </form>
 
-      {bookingArray ? <p>{bookingArray}</p> : null}
+      {/* {bookingArray ? <p>{bookingArray}</p> : null} */}
     </div>
   );
 };
