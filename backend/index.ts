@@ -1,9 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
-
+const body = require('body-parser');
 const mongoRoutes = require('./routes/mongoRoutes');
 
 const app = express();
+
+app.use(body.json());
+app.use(body.urlencoded({ extended: false }));
 
 app.use('/api/', mongoRoutes);
 
@@ -15,5 +18,6 @@ function connector() {
         console.log('Connection failed!');
     });
 }
+
 
 connector();
