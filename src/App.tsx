@@ -11,9 +11,8 @@ function App() {
   //user information retrieval
   const [data, setData] = useState<any>("");
 
-  //booking information
-  const [dateOne, setDateOne] = useState<Date>();
-  const [dateTwo, setDateTwo] = useState<Date>();
+  const [bookingArray, setBookingArray] = useState<any>([]);
+  console.log(bookingArray, "bookingArray");
 
   console.log(data);
   return (

@@ -1,15 +1,31 @@
 import { Request, Response } from 'express';
 const { userModel } = require('../models/mongoSchemas');
 
+// Convert string to date in format: DD/MM/YYYY
 function convert(dates: any) {
     var date = new Date(dates),
         mnth = ("0" + (date.getMonth() + 1)).slice(-2),
         day = ("0" + date.getDate()).slice(-2);
-    console.log([day, mnth, date.getFullYear()].join("-"));
-    return ([day, mnth, date.getFullYear()].join("-"));
+    return ([date.getFullYear(), mnth, day].join("-"));
 }
-convert('Wed Nov 02 2022 15:56:51 GMT+0000');
 
+
+function getDates() {
+    var date1 = new Date(convert('Wed Nov 02 2022 15:56:51 GMT+0000'));
+    var date2 = new Date(convert('Wed Nov 04 2022 15:56:51 GMT+0000'));
+
+    // Get all dates inbetween the two dates
+    var dates = [];
+    while (date1 <= date2) {
+        dates.push(convert(date1));
+        date1.setDate(date1.getDate() + 1);
+    }
+
+    console.log(dates);
+    return dates;
+};
+
+getDates();
 
 const getUser = async (req: Request, res: Response): Promise<Response> => {
     const { userName, userPassword } = req.params;
@@ -31,7 +47,7 @@ const createUser = async (req: Request, res: Response): Promise<Response> => {
 
 // Create holiday booking for user (user can have multiple bookings) - this is a POST request
 
-// Update 
+// Update users holiday hours - this is an update request
 
 // Get all bookings for user - this is a GET request
 
