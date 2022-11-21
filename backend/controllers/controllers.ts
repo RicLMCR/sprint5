@@ -10,6 +10,30 @@ function convert(dates: any) {
 }
 convert('Wed Nov 02 2022 15:56:51 GMT+0000');
 
+// Get two dates inbetween
+const getDates = async () => {
+    var date1 = convert('Wed Nov 02 2022 15:56:51 GMT+0000');
+    var date2 = convert('Wed Nov 04 2022 15:56:51 GMT+0000');
+    var date3 = new Date(date1);
+    var date4 = new Date(date2);
+
+    var diffDays = Math.round(Math.abs((date3.getTime() - date4.getTime()) / (24 * 60 * 60 * 1000)));
+    console.log(diffDays);
+
+    // Just get the dates inbetween not the time
+    var dateArray = new Array();
+    var currentDate = date3;
+    while (currentDate <= date4) {
+        convert(currentDate);
+        dateArray.push(new Date(currentDate));
+        currentDate.setDate(currentDate.getDate() + 1);
+    }
+    console.log(dateArray);
+    return dateArray;
+};
+
+
+getDates();
 
 const getUser = async (req: Request, res: Response): Promise<Response> => {
     const { userName, userPassword } = req.params;
@@ -31,7 +55,7 @@ const createUser = async (req: Request, res: Response): Promise<Response> => {
 
 // Create holiday booking for user (user can have multiple bookings) - this is a POST request
 
-// Update 
+// Update users holiday hours - this is an update request
 
 // Get all bookings for user - this is a GET request
 

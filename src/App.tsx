@@ -10,7 +10,8 @@ import SamsComponent from "./components/samsComponent/SamsComponent";
 function App() {
   const [data, setData] = useState<any>("");
   const [bookingArray, setBookingArray] = useState<any>([]);
-  console.log(bookingArray, "Booking state in App");
+  console.log(bookingArray, "bookingArray");
+
 
   console.log(data);
   return (
