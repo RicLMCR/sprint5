@@ -4,7 +4,7 @@ import { Button, DatePicker, Space, TimePicker, version } from "antd";
 import "antd/dist/antd.css";
 import { getFetch } from "../fetchRequests/FetchReq";
 
-const BookTO = () => {
+const BookTO2 = () => {
   const [dateStart, setDateStart] = useState<Date>();
   const [timeStart, setTimeStart] = useState<Date>();
   const [dateEnd, setDateEnd] = useState<Date>();
@@ -69,4 +69,4 @@ const BookTO = () => {
   );
 };
 
-export default BookTO;
+export default BookTO2;
