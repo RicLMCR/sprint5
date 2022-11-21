@@ -5,24 +5,50 @@ import "antd/dist/antd.css";
 import { getFetch } from "../fetchRequests/FetchReq";
 
 const BookTO = () => {
-  const [dateOne, setDateOne] = useState<Date>();
-  const [dateTwo, setDateTwo] = useState<Date>();
+  const [dateStart, setDateStart] = useState<Date>();
+  const [timeStart, setTimeStart] = useState<Date>();
+  const [dateEnd, setDateEnd] = useState<Date>();
+  const [timeEnd, setTimeEnd] = useState<Date>();
   const [datesBooked, setDatesBooked] = useState<any>([]);
 
+  //store dates/times in states
   const handleDate: Function = (dates: any) => {
-    setDateOne(dates[0]._d);
-    setDateTwo(dates[1]._d);
+    //time start
+    const dateToTimeStart = dates[0]._d;
+    const timeStart = dateToTimeStart.toString();
+    setTimeStart(timeStart.slice(16, 24));
+    //date from
+    setDateStart(dates[0]._d);
+
+    //time end
+    const dateToTimeEnd = dates[1]._d;
+    const timeEnd = dateToTimeEnd.toString();
+    setTimeEnd(timeEnd.slice(16, 24));
+    //date to
+    setDateEnd(dates[1]._d);
   };
 
+  //combine all time/dates into object and send
   const handleClick: Function = (e: any) => {
     e.preventDefault();
-    setDatesBooked([...datesBooked, { dateFrom: dateOne, dateTo: dateTwo }]);
+    setDatesBooked([
+      ...datesBooked,
+      {
+        dateFrom: dateStart,
+        timeFrom: timeStart,
+        dateTo: dateEnd,
+        timeTo: timeEnd,
+      },
+    ]);
     getFetch("Booking Your Dates");
   };
 
-  console.log("date one ios:", dateOne);
-  console.log("date two is:", dateTwo);
-  console.log("catch Louis!!!:", datesBooked);
+  //state populated confirmation
+  // console.log("time Start!!!:", timeStart);
+  // console.log("time End:", timeEnd);
+  console.log("date one ios:", dateStart);
+  console.log("date two is:", dateEnd);
+  console.log("Backend request. Catch Louis!!!:", datesBooked);
 
   return (
     <div>
@@ -30,13 +56,14 @@ const BookTO = () => {
       <h1>antd version: {version}</h1>
       <Space>
         <DatePicker.RangePicker
-          showTime
+          // showTime
           picker="date"
           onChange={(dates: any) => handleDate(dates)}
         />
         <Button onClick={(e) => handleClick(e)} type="primary">
           Submit Request
         </Button>
+        
       </Space>
     </div>
   );
