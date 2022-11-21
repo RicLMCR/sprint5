@@ -1,16 +1,33 @@
 import { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { Button, DatePicker, Space, TimePicker, version } from "antd";
+import { Button, DatePicker, Space, TimePicker } from "antd";
 import "antd/dist/antd.css";
 import "./bookTO.css";
 import { getFetch } from "../fetchRequests/FetchReq";
 
-const BookTO = () => {
-  const [dateOne, setDateOne] = useState<Date>();
-  const [dateTwo, setDateTwo] = useState<Date>();
-  const [datesBooked, setDatesBooked] = useState<any>([]);
-  const [bookBoolean, setBookBoolean] = useState<Boolean>(false);
+//Prop Interface
+interface MyProps {
+  dateOne: Date;
+  setDateOne: any;
+  dateTwo: Date;
+  setDateTwo: any;
+  datesBooked: any;
+  setDatesBooked: any;
+  bookBoolean: Boolean;
+  setBookBoolean: any;
+}
 
+//booking component
+const BookTO = ({
+  dateOne,
+  setDateOne,
+  dateTwo,
+  setDateTwo,
+  datesBooked,
+  setDatesBooked,
+  bookBoolean,
+  setBookBoolean,
+}: MyProps) => {
   //pass date start/end to state
   const handleDate: Function = (dates: any) => {
     setDateOne(dates[0]._d);
@@ -18,10 +35,7 @@ const BookTO = () => {
   };
 
   //calculate dates within booking range
-  const getDatesInRange = (
-    dateOne: Date | undefined,
-    dateTwo: Date | undefined
-  ) => {
+  const getDatesInRange = (dateOne: Date, dateTwo: Date) => {
     //if both date states are true then create array
     if (dateOne && dateTwo) {
       const date = new Date(dateOne!.getTime());
@@ -30,6 +44,7 @@ const BookTO = () => {
       let id: number = 0;
 
       //push object (containing date, id and hours) to temp array
+      //NOTE: hours tbc
       while (date <= dateTwo!) {
         dates.push({ date: newDate, id: id });
         date.setDate(date.getDate() + 1);

@@ -14,13 +14,26 @@ function App() {
   //booking information
   const [dateOne, setDateOne] = useState<Date>();
   const [dateTwo, setDateTwo] = useState<Date>();
+  const [datesBooked, setDatesBooked] = useState<any>([]);
+  const [bookBoolean, setBookBoolean] = useState<Boolean>(false);
 
   console.log(data);
+  console.log("dates booked:", datesBooked);
+
   return (
     <div className="App">
       <Navbar setData={setData} data={data} />
       <UserInfo toAllowance={data} />
-      <BookTO />
+      <BookTO
+        dateOne={dateOne!}
+        setDateOne={setDateOne}
+        dateTwo={dateTwo!}
+        setDateTwo={setDateTwo}
+        datesBooked={datesBooked}
+        setDatesBooked={setDatesBooked}
+        bookBoolean={bookBoolean}
+        setBookBoolean={setBookBoolean}
+      />
     </div>
   );
 }
