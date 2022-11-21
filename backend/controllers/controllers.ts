@@ -9,7 +9,6 @@ function convert(dates: any) {
     return ([date.getFullYear(), mnth, day].join("-"));
 }
 
-
 function getDates() {
     var date1 = new Date(convert('Wed Nov 02 2022 15:56:51 GMT+0000'));
     var date2 = new Date(convert('Wed Nov 04 2022 15:56:51 GMT+0000'));
@@ -46,6 +45,11 @@ const createUser = async (req: Request, res: Response): Promise<Response> => {
 };
 
 // Create holiday booking for user (user can have multiple bookings) - this is a POST request
+const createHolidayBooking = async (req: Request, res: Response): Promise<Response> => {
+    const { } = req.body;
+
+    return res.status(200).json({ message: 'Holiday booking created' });
+};
 
 // Update users holiday hours - this is an update request
 
