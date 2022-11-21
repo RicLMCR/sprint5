@@ -4,7 +4,7 @@ import "./App.css";
 import Navbar from "./components/navBar/Navbar";
 import { useState } from "react";
 import UserInfo from "./components/userInfo/UserInfo";
-import BookTO from "./components/bookTO/BookTO2";
+import BookTO from "./components/bookTO/bookDates";
 import SamsComponent from "./components/samsComponent/SamsComponent";
 
 function App() {
@@ -12,13 +12,14 @@ function App() {
   const [bookingArray, setBookingArray] = useState<any>([]);
   console.log(bookingArray, "bookingArray");
 
+
   console.log(data);
   return (
     <div className="App">
       <Navbar setData={setData} data={data} />
       <UserInfo toAllowance={data} />
-      <BookTO />
-      <SamsComponent />
+      <BookTO bookingArray={bookingArray} setBookingArray={setBookingArray} />
+      {/* <SamsComponent /> */}
     </div>
   );
 }
