@@ -4,7 +4,7 @@ import { Button, DatePicker, Space, TimePicker, version } from "antd";
 import "antd/dist/antd.css";
 import { getFetch } from "../fetchRequests/FetchReq";
 
-const BookTO = () => {
+const BookTO2 = () => {
   const [dateOne, setDateOne] = useState<Date>();
   const [dateTwo, setDateTwo] = useState<Date>();
   const [datesBooked, setDatesBooked] = useState<any>([]);
@@ -14,8 +14,26 @@ const BookTO = () => {
     setDateTwo(dates[1]._d);
   };
 
+  function getDatesInRange(
+    dateOne: Date | undefined,
+    dateTwo: Date | undefined
+  ) {
+    if (dateOne && dateTwo) {
+      const date = new Date(dateOne!.getTime());
+      const dates: any = [];
+      while (date <= dateTwo!) {
+        dates.push(new Date(date).toISOString().split("T")[0]);
+        date.setDate(date.getDate() + 1);
+      }
+      return dates;
+      getFetch(dates);
+    }
+  }
+
   const handleClick: Function = (e: any) => {
     e.preventDefault();
+    getDatesInRange(dateOne, dateTwo);
+    console.log(getDatesInRange(dateOne, dateTwo));
     setDatesBooked([...datesBooked, { dateFrom: dateOne, dateTo: dateTwo }]);
     getFetch("Booking Your Dates");
   };
@@ -30,7 +48,7 @@ const BookTO = () => {
       <h1>antd version: {version}</h1>
       <Space>
         <DatePicker.RangePicker
-          showTime
+          // showTime
           picker="date"
           onChange={(dates: any) => handleDate(dates)}
         />
@@ -42,4 +60,4 @@ const BookTO = () => {
   );
 };
 
-export default BookTO;
+export default BookTO2;
