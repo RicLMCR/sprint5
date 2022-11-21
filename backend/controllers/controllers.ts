@@ -1,37 +1,29 @@
 import { Request, Response } from 'express';
 const { userModel } = require('../models/mongoSchemas');
 
+// Convert string to date in format: DD/MM/YYYY
 function convert(dates: any) {
     var date = new Date(dates),
         mnth = ("0" + (date.getMonth() + 1)).slice(-2),
         day = ("0" + date.getDate()).slice(-2);
-    console.log([day, mnth, date.getFullYear()].join("-"));
-    return ([day, mnth, date.getFullYear()].join("-"));
+    return ([date.getFullYear(), mnth, day].join("-"));
 }
-convert('Wed Nov 02 2022 15:56:51 GMT+0000');
 
-// Get two dates inbetween
-const getDates = async () => {
-    var date1 = convert('Wed Nov 02 2022 15:56:51 GMT+0000');
-    var date2 = convert('Wed Nov 04 2022 15:56:51 GMT+0000');
-    var date3 = new Date(date1);
-    var date4 = new Date(date2);
 
-    var diffDays = Math.round(Math.abs((date3.getTime() - date4.getTime()) / (24 * 60 * 60 * 1000)));
-    console.log(diffDays);
+function getDates() {
+    var date1 = new Date(convert('Wed Nov 02 2022 15:56:51 GMT+0000'));
+    var date2 = new Date(convert('Wed Nov 04 2022 15:56:51 GMT+0000'));
 
-    // Just get the dates inbetween not the time
-    var dateArray = new Array();
-    var currentDate = date3;
-    while (currentDate <= date4) {
-        convert(currentDate);
-        dateArray.push(new Date(currentDate));
-        currentDate.setDate(currentDate.getDate() + 1);
+    // Get all dates inbetween the two dates
+    var dates = [];
+    while (date1 <= date2) {
+        dates.push(convert(date1));
+        date1.setDate(date1.getDate() + 1);
     }
-    console.log(dateArray);
-    return dateArray;
-};
 
+    console.log(dates);
+    return dates;
+};
 
 getDates();
 
