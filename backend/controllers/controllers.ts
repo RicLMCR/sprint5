@@ -21,16 +21,16 @@ const createUser = async (req: Request, res: Response): Promise<Response> => {
 };
 
 const testingBensFetch = async (req: Request, res: Response): Promise<Response> => {
-    const { _id } = req.body;
+    const { _id, dates } = req.body;
 
-    console.log(_id);
+    console.log(_id, dates);
 
     return res.status(201);
 }
 
 // Create holiday booking for user (user can have multiple bookings) - this is a POST request
 const createBooking = async (req: Request, res: Response): Promise<Response> => {
-    const { userId, dates } = req.body;
+    const { _id, dates } = req.body;
 
     const newBooking = await bookingModel.create(req.body);
 
@@ -38,46 +38,61 @@ const createBooking = async (req: Request, res: Response): Promise<Response> => 
 
     // Take dates loop through dates mon-Thu - 8, Fri 5 sat-sun 0
 
-    /* 
-        for (let i = 0; i < array.length; i++) {
-            if (string.includes("Mon" || "Tue" || "Wed" || "Thu")) {
-                bookedHours = (bookedHours + 8);
-            }
-            else if (string.includes("Fri")) {
-                bookedHours = (bookedHours + 5)
-            }
-            else if (String.includes('Sat' || "Sun")) {
-                bookedHours = (bookedHours + 0)
-            }
-            else {
-                res.status(400).json({ error: "There has been an error in calculating the booked hours" })
-            }
-        }
-     */
+    let booked = 0
 
+    let day
+
+
+    for (let i = 0; i < dates.length; i++) {
+
+        let today = dates[i].date
+
+        switch (today) {
+            case "Sun":
+                booked = (booked + 0)
+                day = today
+                break;
+            case "Mon":
+                booked = (booked + 8)
+                day = today
+                break;
+            case "Tue":
+                booked = (booked + 8)
+                day = today
+                break;
+            case "Wed":
+                booked = (booked + 8)
+                day = today
+                break;
+            case "Thu":
+                booked = (booked + 8)
+                day = today;
+                break;
+            case "Fri":
+                booked = (booked + 5)
+                day = today;
+                break;
+            case "Sat":
+                booked = (booked + 0)
+                day = today;
+        }
+
+        // console.log(day)
+    }
+    // console.log(booked)
 
     // Update user available and booked
-    const userUpdate = await userModel.findOneAndUpdate({ userId })
+    const updateAvailable = await userModel.updateUser();
+
 
     return res.status(200).json(newBooking);
 };
 
-
-// Update users holiday hours - this is an update request
-
-
-// const workout = await Workout.findByIdAndUpdate({ _id: id }, {
-//     ...req.body
-// })
-// if (!workout) {
-//     return res.status(404).json({ error: 'no such workout' })
-// }
-
-
 // Get all bookings for user - this is a GET request
-const getBookings = async (req: Request, res: Response) => {
-    const bookings = await bookingModel.find({}).sort({ createdAt: -1 })
-    res.status(200).json(bookings)
+const getBookings = async (req: Request, res: Response): Promise<Response> => {
+    const { _id } = req.params;
+    const bookings = await bookingModel.find({ _id })
+    return res.status(200).json(bookings)
 }
 
 //export

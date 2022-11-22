@@ -1,5 +1,5 @@
 const expressRoutes = require('express');
-const { getUser, createUser, createBooking, testingBensFetch } = require('../controllers/controllers');
+const { getUser, createUser, createBooking, testingBensFetch, getBookings } = require('../controllers/controllers');
 
 const router = expressRoutes.Router();
 
@@ -13,7 +13,7 @@ router.post('/users', createUser);
 router.post('/users/:userId/booking', testingBensFetch);
 
 // Get all bookings for user
-//router.get('/:userId/booking');
+router.get('/:userId/booking', getBookings);
 
 // Update booked holiday
 
