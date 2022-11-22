@@ -3,21 +3,20 @@ export const getFetch = async (datesBooked: any, data: any) => {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      datesBooked: [datesBooked],
-      userId: data.userId,
+      dates: datesBooked,
+      _id: data._id,
     }),
   };
 
   try {
-    if (data) {
-      const response: any = await fetch(
-        `/users/${data.userId}/booking`,
-        requestOptions
-      );
-      const bookingData = await response.json();
-      
-    }
-  } catch (error: any) {
+
+    const response: any = await fetch(
+      `/api/users/${data._id}/booking`,
+      requestOptions
+    );
+    const bookingData = await response.json();
+  }
+  catch (error: any) {
     console.log(error.message);
   }
 };
