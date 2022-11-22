@@ -23,19 +23,17 @@ const createUser = async (req: Request, res: Response): Promise<Response> => {
 
 // Create holiday booking for user (user can have multiple bookings) - this is a POST request
 const createBooking = async (req: Request, res: Response): Promise<Response> => {
-    const { dates } = req.body;
-    console.log(req.body);
-
+    const { _id, dates } = req.body;
+    console.log(dates);
+    // Dates is an array that contains an object with dates
     const newBooking = await bookingModel.create(req.body);
 
     const bookedHours = 0;
 
     // Take dates loop through dates mon-Thu - 8, Fri 5 sat-sun 0
-
     let booked = 0
 
     let day
-
 
     for (let i = 0; i < dates.length; i++) {
 
