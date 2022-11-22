@@ -1,5 +1,5 @@
 const expressRoutes = require('express');
-const { getUser, createUser } = require('../controllers/controllers');
+const { getUser, createUser, createBooking, testingBensFetch } = require('../controllers/controllers');
 
 const router = expressRoutes.Router();
 
@@ -10,10 +10,10 @@ router.get('/users/userName/:userName/userPassword/:userPassword', getUser);
 router.post('/users', createUser);
 
 // Create holiday booking for user
-router.post('/users/:userId/booking',);
+router.post('/users/:userId/booking', testingBensFetch);
 
 // Get all bookings for user
-router.get('/:userId/booking');
+//router.get('/:userId/booking');
 
 // Update booked holiday
 
