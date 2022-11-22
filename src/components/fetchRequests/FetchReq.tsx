@@ -10,8 +10,7 @@ export const getFetch = async (datesBooked: any, data: any) => {
 
   try {
 
-    const response: any = await fetch(
-      `/api/users/${data._id}/booking`,
+    const response: any = await fetch(`/api/bookings/`,
       requestOptions
     );
     const bookingData = await response.json();

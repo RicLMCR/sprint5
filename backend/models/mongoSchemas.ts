@@ -45,11 +45,21 @@ const bookingSchema = new Schema({
     bookingID: Number,
     userId: {
         type: Number,
-        required: true
+        required: false
     },
     dates: [{
-        type: Date,
-        required: true
+        date: {
+            type: Date,
+            required: true
+        },
+        id: {
+            type: Number,
+            required: false
+        },
+        day: {
+            type: String,
+            required: true
+        }
     }]
 });
 
