@@ -16,6 +16,8 @@ interface MyProps {
   bookBoolean: Boolean;
   setBookBoolean: any;
   data: any;
+  setGetDay: React.Dispatch<React.SetStateAction<string>>;
+  getDay: string;
 }
 
 //booking component
@@ -29,6 +31,8 @@ const BookTO = ({
   bookBoolean,
   setBookBoolean,
   data,
+  setGetDay,
+  getDay,
 }: MyProps) => {
   //pass date start/end to state
   const handleDate: Function = (dates: any) => {
@@ -42,16 +46,21 @@ const BookTO = ({
     if (dateOne && dateTwo) {
       const date = new Date(dateOne!.getTime());
       const dates: any = [];
+
       let id: number = 0;
+      let getDay: string;
 
       //for each date within the range, push object (containing date, id and hours) to temp array
       //NOTE: add hours?
       //NOTE: add name of day?
       while (date <= dateTwo!) {
+        getDay = date.toString().substring(0, 3);
+        // console.log(getDay, "I am day");
         const newDate = new Date(date).toISOString().split("T")[0];
-        dates.push({ date: newDate, id: id });
+        dates.push({ date: newDate, id: id, day: getDay });
         date.setDate(date.getDate() + 1);
         id = id + 1;
+        console.log("dates is:", date);
       }
       setDatesBooked(dates);
       // getFetch(datesBooked, data);
@@ -65,15 +74,16 @@ const BookTO = ({
     e.preventDefault();
     getDatesInRange(dateOne, dateTwo);
     setBookBoolean(true);
-    if (data) {
-      if (datesBooked) {
-        getFetch(datesBooked, data);
-      }
-    }
   };
 
+  //! Posting Booking
+  if (data) {
+    if (datesBooked) {
+      getFetch(datesBooked, data);
+    }
+  }
 
-  useEffect(() => { });
+  useEffect(() => {});
 
   return (
     <div className="bookTOContainer">
@@ -91,14 +101,13 @@ const BookTO = ({
         {bookBoolean ? (
           <div>
             <h2>You have requested:</h2>{" "}
-            {Array.isArray(datesBooked) &&
-              datesBooked.map((date: any) => (
-                <div className="dateBookingList" key={date.id}>
-                  <p>
-                    Date {date.id} is: {date.date}
-                  </p>
-                </div>
-              ))}
+            {datesBooked.map((date: any) => (
+              <div className="dateBookingList" key={date.id}>
+                <p>
+                  Date {date.id} is: {date.date}
+                </p>
+              </div>
+            ))}
             <button onClick={() => setBookBoolean(false)}>Exit</button>
           </div>
         ) : (

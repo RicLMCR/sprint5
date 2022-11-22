@@ -16,13 +16,12 @@ function App() {
   const [dateTwo, setDateTwo] = useState<Date>();
   const [datesBooked, setDatesBooked] = useState<any>([]);
   const [bookBoolean, setBookBoolean] = useState<Boolean>(false);
+  const [getDay, setGetDay] = useState<string>("");
 
   console.log(data);
   console.log("dates booked:", datesBooked);
   console.log(data.userId, " I am user id");
   console.log(data._id, " I am _id");
-
-
 
   return (
     <div className="App">
@@ -38,6 +37,8 @@ function App() {
         bookBoolean={bookBoolean}
         setBookBoolean={setBookBoolean}
         data={data}
+        setGetDay={setGetDay}
+        getDay={getDay}
       />
     </div>
   );
