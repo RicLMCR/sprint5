@@ -45,7 +45,7 @@ const createUser = async (req: Request, res: Response): Promise<Response> => {
 };
 
 // Create holiday booking for user (user can have multiple bookings) - this is a POST request
-const createHolidayBooking = async (req: Request, res: Response): Promise<Response> => {
+const createBooking = async (req: Request, res: Response): Promise<Response> => {
     const { } = req.body;
 
     return res.status(200).json({ message: 'Holiday booking created' });

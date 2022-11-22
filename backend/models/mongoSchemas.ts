@@ -41,6 +41,18 @@ const userSchema = new Schema({
     }
 });
 
+const bookingSchema = new Schema({
+    bookingID: Number,
+    userId: {
+        type: Number,
+        required: true
+    },
+    dates: [{
+        type: Date,
+        required: true
+    }]
+});
+
 const userModel = mongooseSchema.model('User', userSchema);
 
 
