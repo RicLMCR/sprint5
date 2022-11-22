@@ -8,7 +8,7 @@ import BookTO from "./components/bookTO/BookTO";
 import SamsComponent from "./components/samsComponent/SamsComponent";
 
 function App() {
-  //user information retrieval
+  //user information on login
   const [data, setData] = useState<any>("");
 
   //booking information

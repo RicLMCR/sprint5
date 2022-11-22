@@ -36,32 +36,34 @@ const BookTO = ({
 
   //calculate dates within booking range
   const getDatesInRange = (dateOne: Date, dateTwo: Date) => {
-    //if both date states are true then create array
+    //if both date states are true then create dates to fill the range and create an array
     if (dateOne && dateTwo) {
       const date = new Date(dateOne!.getTime());
       const dates: any = [];
-      const newDate = new Date(date).toISOString().split("T")[0];
+
       let id: number = 0;
 
-      //push object (containing date, id and hours) to temp array
-      //NOTE: hours tbc
+      //for each date within the range, push object (containing date, id and hours) to temp array
+      //NOTE: add hours?
+      //NOTE: add name of day?
       while (date <= dateTwo!) {
+        const newDate = new Date(date).toISOString().split("T")[0];
         dates.push({ date: newDate, id: id });
         date.setDate(date.getDate() + 1);
         id = id + 1;
+        console.log("dates is:", date);
       }
       setDatesBooked(dates);
-      getFetch(dates);
+      getFetch("Booking Your Dates");
       return dates;
     }
   };
 
-  //on submit
+  //on submit, trigger date range calculation
   const handleClick: Function = (e: any) => {
     e.preventDefault();
     getDatesInRange(dateOne, dateTwo);
     setBookBoolean(true);
-    getFetch("Booking Your Dates");
   };
 
   useEffect(() => {});
@@ -79,14 +81,21 @@ const BookTO = ({
         </Button>
       </Space>
       <div className="datesList">
-        {bookBoolean ? <h2>You have requested:</h2> : ""}
-        {datesBooked.map((date: any) => (
-          <div className="dateBookingList" key={date.id}>
-            <p>
-              Date {date.id} is: {date.date}
-            </p>
+        {bookBoolean ? (
+          <div>
+            <h2>You have requested:</h2>{" "}
+            {datesBooked.map((date: any) => (
+              <div className="dateBookingList" key={date.id}>
+                <p>
+                  Date {date.id} is: {date.date}
+                </p>
+              </div>
+            ))}
+            <button onClick={() => setBookBoolean(false)}>Exit</button>
           </div>
-        ))}
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
