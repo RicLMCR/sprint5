@@ -1,30 +1,6 @@
 import { Request, Response } from 'express';
-const { userModel } = require('../models/mongoSchemas');
-
-// Convert string to date in format: DD/MM/YYYY
-function convert(dates: any) {
-    var date = new Date(dates),
-        mnth = ("0" + (date.getMonth() + 1)).slice(-2),
-        day = ("0" + date.getDate()).slice(-2);
-    return ([date.getFullYear(), mnth, day].join("-"));
-}
-
-function getDates() {
-    var date1 = new Date(convert('Wed Nov 02 2022 15:56:51 GMT+0000'));
-    var date2 = new Date(convert('Wed Nov 04 2022 15:56:51 GMT+0000'));
-
-    // Get all dates inbetween the two dates
-    var dates = [];
-    while (date1 <= date2) {
-        dates.push(convert(date1));
-        date1.setDate(date1.getDate() + 1);
-    }
-
-    console.log(dates);
-    return dates;
-};
-
-getDates();
+const { userModel, bookingModel } = require('../models/mongoSchemas');
+const mongoose = require('mongoose');
 
 const getUser = async (req: Request, res: Response): Promise<Response> => {
     const { userName, userPassword } = req.params;
@@ -44,20 +20,78 @@ const createUser = async (req: Request, res: Response): Promise<Response> => {
     }
 };
 
-// Create holiday booking for user (user can have multiple bookings) - this is a POST request
-const createHolidayBooking = async (req: Request, res: Response): Promise<Response> => {
-    const { } = req.body;
+const testingBensFetch = async (req: Request, res: Response): Promise<Response> => {
+<<<<<<< HEAD
+    const { userId, dates } = req.body;
 
-    return res.status(200).json({ message: 'Holiday booking created' });
+    console.log(req.body);
+=======
+    const { _id } = req.body;
+
+    console.log(_id);
+>>>>>>> 8fdb29fb476449e6515c31d35817395179a7847f
+
+    return res.status(201);
+}
+
+// Create holiday booking for user (user can have multiple bookings) - this is a POST request
+const createBooking = async (req: Request, res: Response): Promise<Response> => {
+    const { userId, dates } = req.body;
+
+    const newBooking = await bookingModel.create(req.body);
+
+    const bookedHours = 0;
+
+    // Take dates loop through dates mon-Thu - 8, Fri 5 sat-sun 0
+
+    /* 
+        for (let i = 0; i < array.length; i++) {
+            if (string.includes("Mon" || "Tue" || "Wed" || "Thu")) {
+                bookedHours = (bookedHours + 8);
+            }
+            else if (string.includes("Fri")) {
+                bookedHours = (bookedHours + 5)
+            }
+            else if (String.includes('Sat' || "Sun")) {
+                bookedHours = (bookedHours + 0)
+            }
+            else {
+                res.status(400).json({ error: "There has been an error in calculating the booked hours" })
+            }
+        }
+     */
+
+
+    // Update user available and booked
+    const userUpdate = await userModel.findOneAndUpdate({ userId })
+
+    return res.status(200).json(newBooking);
 };
+
 
 // Update users holiday hours - this is an update request
 
+
+// const workout = await Workout.findByIdAndUpdate({ _id: id }, {
+//     ...req.body
+// })
+// if (!workout) {
+//     return res.status(404).json({ error: 'no such workout' })
+// }
+
+
 // Get all bookings for user - this is a GET request
+const getBookings = async (req: Request, res: Response) => {
+    const bookings = await bookingModel.find({}).sort({ createdAt: -1 })
+    res.status(200).json(bookings)
+}
 
 //export
 module.exports = {
-    getUser,
-    createUser
+    getBookings,
+    createUser,
+    createBooking,
+    testingBensFetch,
+    getUser
 }
 

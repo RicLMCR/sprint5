@@ -19,6 +19,10 @@ function App() {
 
   console.log(data);
   console.log("dates booked:", datesBooked);
+  console.log(data.userId, " I am user id");
+  console.log(data._id, " I am _id");
+
+
 
   return (
     <div className="App">
@@ -33,6 +37,7 @@ function App() {
         setDatesBooked={setDatesBooked}
         bookBoolean={bookBoolean}
         setBookBoolean={setBookBoolean}
+        data={data}
       />
     </div>
   );
