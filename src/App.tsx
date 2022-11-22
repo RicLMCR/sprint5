@@ -33,6 +33,7 @@ function App() {
         setDatesBooked={setDatesBooked}
         bookBoolean={bookBoolean}
         setBookBoolean={setBookBoolean}
+        data={data}
       />
     </div>
   );
