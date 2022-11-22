@@ -42,7 +42,6 @@ const BookTO = ({
     if (dateOne && dateTwo) {
       const date = new Date(dateOne!.getTime());
       const dates: any = [];
-
       let id: number = 0;
 
       //for each date within the range, push object (containing date, id and hours) to temp array
@@ -53,7 +52,6 @@ const BookTO = ({
         dates.push({ date: newDate, id: id });
         date.setDate(date.getDate() + 1);
         id = id + 1;
-        console.log("dates is:", date);
       }
       setDatesBooked(dates);
       // getFetch(datesBooked, data);
@@ -95,13 +93,14 @@ const BookTO = ({
         {bookBoolean ? (
           <div>
             <h2>You have requested:</h2>{" "}
-            {datesBooked.map((date: any) => (
-              <div className="dateBookingList" key={date.id}>
-                <p>
-                  Date {date.id} is: {date.date}
-                </p>
-              </div>
-            ))}
+            {Array.isArray(datesBooked) &&
+              datesBooked.map((date: any) => (
+                <div className="dateBookingList" key={date.id}>
+                  <p>
+                    Date {date.id} is: {date.date}
+                  </p>
+                </div>
+              ))}
             <button onClick={() => setBookBoolean(false)}>Exit</button>
           </div>
         ) : (
