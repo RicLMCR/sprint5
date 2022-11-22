@@ -69,6 +69,14 @@ const BookTO = ({
     setBookBoolean(true);
   };
 
+  const handleUserAndBookings = () => {
+    if (data) {
+      if (datesBooked) {
+        getFetch(datesBooked, data);
+      }
+    }
+  };
+
   useEffect(() => {});
 
   return (
