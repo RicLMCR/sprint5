@@ -15,6 +15,7 @@ interface MyProps {
   setDatesBooked: any;
   bookBoolean: Boolean;
   setBookBoolean: any;
+  data: any;
 }
 
 //booking component
@@ -27,6 +28,7 @@ const BookTO = ({
   setDatesBooked,
   bookBoolean,
   setBookBoolean,
+  data,
 }: MyProps) => {
   //pass date start/end to state
   const handleDate: Function = (dates: any) => {
@@ -54,7 +56,8 @@ const BookTO = ({
         console.log("dates is:", date);
       }
       setDatesBooked(dates);
-      getFetch("Booking Your Dates");
+      // getFetch(datesBooked, data);
+
       return dates;
     }
   };
