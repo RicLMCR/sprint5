@@ -40,16 +40,18 @@ const BookTO = ({
     if (dateOne && dateTwo) {
       const date = new Date(dateOne!.getTime());
       const dates: any = [];
-      const newDate = new Date(date).toISOString().split("T")[0];
+
       let id: number = 0;
 
       //for each date within the range, push object (containing date, id and hours) to temp array
       //NOTE: add hours?
       //NOTE: add name of day?
       while (date <= dateTwo!) {
+        const newDate = new Date(date).toISOString().split("T")[0];
         dates.push({ date: newDate, id: id });
         date.setDate(date.getDate() + 1);
         id = id + 1;
+        console.log("dates is:", date);
       }
       setDatesBooked(dates);
       getFetch("Booking Your Dates");
