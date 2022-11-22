@@ -21,9 +21,9 @@ const createUser = async (req: Request, res: Response): Promise<Response> => {
 };
 
 const testingBensFetch = async (req: Request, res: Response): Promise<Response> => {
-    const { userId, dates } = req.body;
+    const { _id } = req.body;
 
-    console.log(req.body);
+    console.log(_id);
 
     return res.status(201);
 }

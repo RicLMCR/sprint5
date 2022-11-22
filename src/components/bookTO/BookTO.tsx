@@ -65,9 +65,6 @@ const BookTO = ({
     e.preventDefault();
     getDatesInRange(dateOne, dateTwo);
     setBookBoolean(true);
-  };
-
-  const handleUserAndBookings = () => {
     if (data) {
       if (datesBooked) {
         getFetch(datesBooked, data);
@@ -75,7 +72,8 @@ const BookTO = ({
     }
   };
 
-  useEffect(() => {});
+
+  useEffect(() => { });
 
   return (
     <div className="bookTOContainer">
