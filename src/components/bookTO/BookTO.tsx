@@ -2,6 +2,7 @@ import { Button, DatePicker, Space, TimePicker } from "antd";
 import "antd/dist/antd.css";
 import "./bookTO.css";
 import { getFetch } from "../fetchRequests/FetchReq";
+import { logDOM } from "@testing-library/react";
 
 //Prop Interface
 interface MyProps {
@@ -32,13 +33,16 @@ const BookTO = ({
   setGetDay,
   getDay,
 }: MyProps) => {
+  // const [datesBooked, setDatesBooked] = useState<any>([]);
   //pass date start/end to state
   const handleDate: Function = (dates: any) => {
     setDateOne(dates[0]._d);
     setDateTwo(dates[1]._d);
   };
 
+
   //Calculate dates within booking range
+
   const getDatesInRange = (dateOne: Date, dateTwo: Date) => {
     //if both date states are true then create dates to fill
     if (dateOne && dateTwo) {
@@ -61,6 +65,7 @@ const BookTO = ({
       return dates;
     }
   };
+
 
   //On submit, trigger date range calculation
   const handleDates: Function = (e: any) => {
@@ -93,6 +98,7 @@ const BookTO = ({
   return (
     <div className="bookTOContainer">
       <h1>Book Time Off Here</h1>
+
       <Space>
         <DatePicker.RangePicker
           picker="date"

@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+const { getHours } = require('./utils/utils');
 const { userModel, bookingModel } = require('../models/mongoSchemas');
 
 
@@ -20,64 +21,40 @@ const createUser = async (req: Request, res: Response): Promise<Response> => {
     }
 };
 
-
 // Create holiday booking for user (user can have multiple bookings) - this is a POST request
 const createBooking = async (req: Request, res: Response): Promise<Response> => {
-    const { _id, dates } = req.body;
-    console.log(dates);
-    // Dates is an array that contains an object with dates
-    const newBooking = await bookingModel.create(req.body);
+    const { userId, dates } = req.body;
+    // Get if dates array is empty
+    if (dates.length === 0 || dates === undefined) {
+        return res.status(400).json({ message: 'No dates selected' });
+    } else {
+        const newBooking = await bookingModel.create({ userId, dates });
 
-    const bookedHours = 0;
+        const hours = getHours(dates);
 
-    // Take dates loop through dates mon-Thu - 8, Fri 5 sat-sun 0
-    let booked = 0
 
-    let day
+        // Get the users current hours
+        // Check if user already exists
+        const getUser = await userModel.findOne({ userId });
+        const getUserHours = getUser.timeOff.PTO;
 
-    for (let i = 0; i < dates.length; i++) {
 
-        let today = dates[i].day
 
-        switch (today) {
-            case "Sun":
-                booked = (booked + 0)
-                day = today
-                break;
-            case "Mon":
-                booked = (booked + 8)
-                day = today
-                break;
-            case "Tue":
-                booked = (booked + 8)
-                day = today
-                break;
-            case "Wed":
-                booked = (booked + 8)
-                day = today
-                break;
-            case "Thu":
-                booked = (booked + 8)
-                day = today;
-                break;
-            case "Fri":
-                booked = (booked + 5)
-                day = today;
-                break;
-            case "Sat":
-                booked = (booked + 0)
-                day = today;
+
+        if (getUserHours.available - hours <= 0) {
+            console.log("You do not have enough hours :(");
+        } else if (getUserHours.available > 0) {
+            console.log("Update completed :)");
+
+            await userModel.findOneAndUpdate({ userId, "timeOff.PTO.available": getUserHours.available - hours });
         }
+        await userModel.findOneAndUpdate({ userId, "timeOff.PTO.booked": hours });
 
-        // console.log(day)
+        // let updatedBookings = await userModel.findOne("timeOff.PTO.available")
+        // console.log(updatedBookings);
+
+        return res.status(201).json(newBooking);
     }
-    console.log(booked)
-
-    // Update user available and booked
-
-
-
-    return res.status(200).json(newBooking);
 };
 
 // Get all bookings for user - this is a GET request

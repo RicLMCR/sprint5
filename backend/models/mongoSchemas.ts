@@ -3,6 +3,10 @@ const mongooseSchema = require('mongoose');
 const Schema = mongooseSchema.Schema;
 
 const userSchema = new Schema({
+    userId: {
+        type: Number,
+        required: true
+    },
     userName: {
         type: String,
         required: true
@@ -45,7 +49,7 @@ const bookingSchema = new Schema({
     bookingID: Number,
     userId: {
         type: Number,
-        required: false
+        required: true
     },
     dates: [{
         date: {
@@ -64,9 +68,11 @@ const bookingSchema = new Schema({
 });
 
 const userModel = mongooseSchema.model('User', userSchema);
+const bookingModel = mongooseSchema.model('Booking', bookingSchema);
 
 
 module.exports = {
-    userModel
+    userModel,
+    bookingModel
 }
 

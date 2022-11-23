@@ -21,7 +21,54 @@ function getDates() {
     return dates;
 };
 
+function getHours(dates: any) {
+    // Take dates loop through dates mon-Thu - 8, Fri 5 sat-sun 0
+    let booked = 0
+
+    let day
+
+    for (let i = 0; i < dates.length; i++) {
+
+        let today = dates[i].day
+
+        switch (today) {
+            case "Sun":
+                booked = (booked + 0)
+                day = today
+                break;
+            case "Mon":
+                booked = (booked + 8)
+                day = today
+                break;
+            case "Tue":
+                booked = (booked + 8)
+                day = today
+                break;
+            case "Wed":
+                booked = (booked + 8)
+                day = today
+                break;
+            case "Thu":
+                booked = (booked + 8)
+                day = today;
+                break;
+            case "Fri":
+                booked = (booked + 5)
+                day = today;
+                break;
+            case "Sat":
+                booked = (booked + 0)
+                day = today;
+                break;
+        }
+
+        // console.log(day)
+    }
+    return booked;
+}
+
 module.exports = {
     convert,
-    getDates
+    getDates,
+    getHours
 }

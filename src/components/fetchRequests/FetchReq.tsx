@@ -5,12 +5,11 @@ export const getFetch = async (datesBooked: any, data: any) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       dates: datesBooked,
-      _id: data._id,
+      userId: data.userId,
     }),
   };
 
   try {
-
     const response: any = await fetch(`/api/bookings/`,
       requestOptions
     );
