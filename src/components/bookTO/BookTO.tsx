@@ -63,8 +63,6 @@ const BookTO = ({
         console.log("dates is:", date);
       }
       setDatesBooked(dates);
-      // getFetch(datesBooked, data);
-
       return dates;
     }
   };
@@ -74,16 +72,28 @@ const BookTO = ({
     e.preventDefault();
     getDatesInRange(dateOne, dateTwo);
     setBookBoolean(true);
-    //! Posting Booking
-    if (data) {
-      if (datesBooked) {
-        getFetch(datesBooked, data);
-      }
-    }
   };
 
+  //Add selected hours to booking object
+  const handleHours: Function = (hours: number, id: number) => {
+    console.log("handle hours", hours, id);
+    datesBooked[id].hours = hours;
+  };
 
-  useEffect(() => { });
+  //post booking
+  const handleSubmitBooking = () => {
+    //! verify user id available
+    // if (data) {
+    //   if (datesBooked) {
+    //     getFetch(datesBooked, data);
+    //     console.log("handleSubmitBook", datesBooked, data);
+    //   }
+    // }
+    if (datesBooked) {
+      getFetch(datesBooked, data);
+      console.log("handleSubmitBook", datesBooked, data);
+    }
+  };
 
   return (
     <div className="bookTOContainer">
@@ -93,8 +103,8 @@ const BookTO = ({
           picker="date"
           onChange={(dates: any) => handleDate(dates)}
         />
-        <Button onClick={(e) => handleClick(e)} type="primary">
-          Submit Request
+        <Button className="dateBookingButtons" onClick={(e) => handleClick(e)}>
+          Confirm Dates
         </Button>
       </Space>
       <div className="datesList">
@@ -106,9 +116,26 @@ const BookTO = ({
                 <p>
                   Date {date.id} is: {date.date}
                 </p>
+                <p>Enter Hours</p>
+                <input
+                  className="dateBookingListHours"
+                  type="number"
+                  onChange={(e) => handleHours(e.target.value, date.id)}
+                  required/>
               </div>
             ))}
-            <button onClick={() => setBookBoolean(false)}>Exit</button>
+            <button
+              className="dateBookingButtons"
+              onClick={handleSubmitBooking}
+            >
+              Submit
+            </button>
+            <button
+              className="dateBookingButtons"
+              onClick={() => setBookBoolean(false)}
+            >
+              Cancel
+            </button>
           </div>
         ) : (
           ""

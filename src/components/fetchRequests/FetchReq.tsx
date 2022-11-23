@@ -1,4 +1,5 @@
 export const getFetch = async (datesBooked: any, data: any) => {
+  console.log("getFetch:", datesBooked)
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
