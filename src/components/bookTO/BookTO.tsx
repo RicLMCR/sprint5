@@ -3,6 +3,7 @@ import "antd/dist/antd.css";
 import "./bookTO.css";
 import { getFetch } from "../fetchRequests/FetchReq";
 import { logDOM } from "@testing-library/react";
+import { useState } from "react";
 
 //Prop Interface
 interface MyProps {
@@ -33,13 +34,14 @@ const BookTO = ({
   setGetDay,
   getDay,
 }: MyProps) => {
-  // const [datesBooked, setDatesBooked] = useState<any>([]);
+  const [hoursArray, setHoursArray] = useState<number[]>([]);
+  const [datesArray, setDatesArray] = useState<Object[]>([]);
+  const [datesArray2, setDatesArray2] = useState<Object[]>([]);
   //pass date start/end to state
   const handleDate: Function = (dates: any) => {
     setDateOne(dates[0]._d);
     setDateTwo(dates[1]._d);
   };
-
 
   //Calculate dates within booking range
 
@@ -66,7 +68,6 @@ const BookTO = ({
     }
   };
 
-
   //On submit, trigger date range calculation
   const handleDates: Function = (e: any) => {
     e.preventDefault();
@@ -78,6 +79,8 @@ const BookTO = ({
   const handleHours: Function = (hours: number, id: number) => {
     console.log("handle hours", hours, id);
     datesBooked[id].hours = hours;
+    setDatesArray(datesBooked);
+    console.log(datesArray, "I AM DATES ARAYYYYYYYY");
   };
 
   //Post booking
@@ -89,10 +92,16 @@ const BookTO = ({
     //     console.log("handleSubmitBook", datesBooked, data);
     //   }
     // }
-    if (datesBooked) {
+    // if (datesBooked) {
+    //   getFetch(datesBooked, data);
+    //   console.log("handleSubmitBook", datesBooked, data);
+    // }
+    // for (let i = 0; i < datesBooked.length; i++) {
+    if ("hours" in datesBooked[datesBooked.length - 1]) {
       getFetch(datesBooked, data);
-      console.log("handleSubmitBook", datesBooked, data);
+      console.log(datesBooked, "LOOOOOOOOP");
     }
+    // }
   };
 
   return (
