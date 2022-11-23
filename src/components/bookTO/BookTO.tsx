@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { createRoot } from "react-dom/client";
 import { Button, DatePicker, Space, TimePicker } from "antd";
 import "antd/dist/antd.css";
 import "./bookTO.css";
@@ -43,19 +41,17 @@ const BookTO = ({
   };
 
 
-  //calculate dates within booking range
+  //Calculate dates within booking range
+
   const getDatesInRange = (dateOne: Date, dateTwo: Date) => {
-    //if both date states are true then create dates to fill the range and create an array
+    //if both date states are true then create dates to fill
     if (dateOne && dateTwo) {
       const date = new Date(dateOne!.getTime());
       const dates: any = [];
-
       let id: number = 0;
       let getDay: string;
 
-      //for each date within the range, push object (containing date, id and hours) to temp array
-      //NOTE: add hours?
-      //NOTE: add name of day?
+      //for each date within the range, push object (containing date, day, id and hours) to temp array
       while (date <= dateTwo!) {
         getDay = date.toString().substring(0, 3);
         // console.log(getDay, "I am day");
@@ -66,28 +62,38 @@ const BookTO = ({
         console.log("dates is:", date);
       }
       setDatesBooked(dates);
-      // getFetch(datesBooked, data);
-
       return dates;
     }
   };
 
-  //on submit, trigger date range calculation
-  const handleClick: Function = (e: any) => {
+
+  //On submit, trigger date range calculation
+  const handleDates: Function = (e: any) => {
+    e.preventDefault();
     getDatesInRange(dateOne, dateTwo);
     setBookBoolean(true);
-    //! Posting Booking
-
   };
 
+  //Add selected hours to booking object
+  const handleHours: Function = (hours: number, id: number) => {
+    console.log("handle hours", hours, id);
+    datesBooked[id].hours = hours;
+  };
 
-  useEffect(() => {
-    if (data) {
-      if (datesBooked.length != 0) {
-        getFetch(datesBooked, data);
-      }
+  //Post booking
+  const handleSubmitBooking = () => {
+    //! verify user id available
+    // if (data) {
+    //   if (datesBooked) {
+    //     getFetch(datesBooked, data);
+    //     console.log("handleSubmitBook", datesBooked, data);
+    //   }
+    // }
+    if (datesBooked) {
+      getFetch(datesBooked, data);
+      console.log("handleSubmitBook", datesBooked, data);
     }
-  }, [datesBooked]);
+  };
 
   return (
     <div className="bookTOContainer">
@@ -98,22 +104,44 @@ const BookTO = ({
           picker="date"
           onChange={(dates: any) => handleDate(dates)}
         />
-        <Button onClick={(e) => handleClick(e.preventDefault)} type="primary">
-          Submit Request
-        </Button>
+        <button className="dateBookingButtons" onClick={(e) => handleDates(e)}>
+          Confirm Dates
+        </button>
       </Space>
       <div className="datesList">
         {bookBoolean ? (
           <div>
             <h2>You have requested:</h2>{" "}
-            {datesBooked.map((date: any) => (
-              <div className="dateBookingList" key={date.id}>
+            {datesBooked.map((date: any, index: any) => (
+              <div className="dateBookingList" key={index}>
                 <p>
-                  Date {date.id} is: {date.date}
+                  Date {index} is: {date.date}
                 </p>
+                <p>Enter Hours</p>
+                <input
+                  className="dateBookingHoursInput"
+                  type="number"
+                  max="24"
+                  min="0"
+                  onChange={(e) => handleHours(e.target.value, index)}
+                  required
+                />
               </div>
             ))}
-            <button onClick={() => setBookBoolean(false)}>Exit</button>
+            <div className="bookingButtonContainer">
+              <button
+                className="dateBookingButtons buttonSubmit"
+                onClick={handleSubmitBooking}
+              >
+                Submit
+              </button>
+              <button
+                className="dateBookingButtons buttonCancel"
+                onClick={() => setBookBoolean(false)}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         ) : (
           ""

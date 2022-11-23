@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import "./App.css";
 import Navbar from "./components/navBar/Navbar";
@@ -25,6 +25,11 @@ function App() {
   console.log(data);
 
   //console.log(data._id, " I am _id");
+
+  console.log("datesbooked", datesBooked)
+
+  useEffect(()=>{
+  },[datesBooked]);
 
   return (
     <div className="App">
