@@ -14,28 +14,46 @@
   border-radius: 2px;
   color: white;
   background-color: #1890ff;
-  margin: 0.3em;
-  padding: .5em;
+  margin-bottom: 1vh;
+  padding: 0.5em;
   display: flex;
   align-items: center;
   border-radius: 10px;
 }
 
-.dateBookingList>p{
+.dateBookingList > p {
   margin-left: 1vw;
 }
 
-.dateBookingListHours {
+.dateBookingHoursInput {
   height: 3vh;
   width: 3vw;
-  margin: 0 1vw 0 1vw;
+  margin: 1em;
   color: black;
 }
 
-.dateBookingButtons{
-  margin: 1em;
+.bookingButtonContainer {
+  height: 3vh;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dateBookingButtons {
+  height: 5vh;
   border: none;
   color: white;
   background-color: #1890ff;
-  border-radius: 5px;
+  border-radius: 10px;
+}
+
+.buttonSubmit {
+  width: 49%;
+  background-color: rgb(7, 199, 7);
+  margin-right: 0.5em;
+}
+
+.buttonCancel {
+  width: 49%;
+  background-color: red;
+  margin-left: 0.5em;
 }

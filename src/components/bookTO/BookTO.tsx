@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { createRoot } from "react-dom/client";
 import { Button, DatePicker, Space, TimePicker } from "antd";
 import "antd/dist/antd.css";
 import "./bookTO.css";
@@ -40,19 +38,16 @@ const BookTO = ({
     setDateTwo(dates[1]._d);
   };
 
-  //calculate dates within booking range
+  //Calculate dates within booking range
   const getDatesInRange = (dateOne: Date, dateTwo: Date) => {
-    //if both date states are true then create dates to fill the range and create an array
+    //if both date states are true then create dates to fill
     if (dateOne && dateTwo) {
       const date = new Date(dateOne!.getTime());
       const dates: any = [];
-
       let id: number = 0;
       let getDay: string;
 
-      //for each date within the range, push object (containing date, id and hours) to temp array
-      //NOTE: add hours?
-      //NOTE: add name of day?
+      //for each date within the range, push object (containing date, day, id and hours) to temp array
       while (date <= dateTwo!) {
         getDay = date.toString().substring(0, 3);
         // console.log(getDay, "I am day");
@@ -67,8 +62,8 @@ const BookTO = ({
     }
   };
 
-  //on submit, trigger date range calculation
-  const handleClick: Function = (e: any) => {
+  //On submit, trigger date range calculation
+  const handleDates: Function = (e: any) => {
     e.preventDefault();
     getDatesInRange(dateOne, dateTwo);
     setBookBoolean(true);
@@ -80,7 +75,7 @@ const BookTO = ({
     datesBooked[id].hours = hours;
   };
 
-  //post booking
+  //Post booking
   const handleSubmitBooking = () => {
     //! verify user id available
     // if (data) {
@@ -103,39 +98,44 @@ const BookTO = ({
           picker="date"
           onChange={(dates: any) => handleDate(dates)}
         />
-        <Button className="dateBookingButtons" onClick={(e) => handleClick(e)}>
+        <button className="dateBookingButtons" onClick={(e) => handleDates(e)}>
           Confirm Dates
-        </Button>
+        </button>
       </Space>
       <div className="datesList">
         {bookBoolean ? (
           <div>
             <h2>You have requested:</h2>{" "}
-            {datesBooked.map((date: any) => (
-              <div className="dateBookingList" key={date.id}>
+            {datesBooked.map((date: any, index: any) => (
+              <div className="dateBookingList" key={index}>
                 <p>
-                  Date {date.id} is: {date.date}
+                  Date {index} is: {date.date}
                 </p>
                 <p>Enter Hours</p>
                 <input
-                  className="dateBookingListHours"
+                  className="dateBookingHoursInput"
                   type="number"
-                  onChange={(e) => handleHours(e.target.value, date.id)}
-                  required/>
+                  max="24"
+                  min="0"
+                  onChange={(e) => handleHours(e.target.value, index)}
+                  required
+                />
               </div>
             ))}
-            <button
-              className="dateBookingButtons"
-              onClick={handleSubmitBooking}
-            >
-              Submit
-            </button>
-            <button
-              className="dateBookingButtons"
-              onClick={() => setBookBoolean(false)}
-            >
-              Cancel
-            </button>
+            <div className="bookingButtonContainer">
+              <button
+                className="dateBookingButtons buttonSubmit"
+                onClick={handleSubmitBooking}
+              >
+                Submit
+              </button>
+              <button
+                className="dateBookingButtons buttonCancel"
+                onClick={() => setBookBoolean(false)}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         ) : (
           ""
