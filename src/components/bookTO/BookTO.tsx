@@ -4,6 +4,7 @@ import { Button, DatePicker, Space, TimePicker } from "antd";
 import "antd/dist/antd.css";
 import "./bookTO.css";
 import { getFetch } from "../fetchRequests/FetchReq";
+import { logDOM } from "@testing-library/react";
 
 //Prop Interface
 interface MyProps {
@@ -34,11 +35,13 @@ const BookTO = ({
   setGetDay,
   getDay,
 }: MyProps) => {
+  // const [datesBooked, setDatesBooked] = useState<any>([]);
   //pass date start/end to state
   const handleDate: Function = (dates: any) => {
     setDateOne(dates[0]._d);
     setDateTwo(dates[1]._d);
   };
+
 
   //calculate dates within booking range
   const getDatesInRange = (dateOne: Date, dateTwo: Date) => {
@@ -71,29 +74,31 @@ const BookTO = ({
 
   //on submit, trigger date range calculation
   const handleClick: Function = (e: any) => {
-    e.preventDefault();
     getDatesInRange(dateOne, dateTwo);
     setBookBoolean(true);
     //! Posting Booking
-    if (data) {
-      if (datesBooked) {
-        getFetch(datesBooked, data);
-      }
-    }
+
   };
 
 
-  useEffect(() => { });
+  useEffect(() => {
+    if (data) {
+      if (datesBooked.length != 0) {
+        getFetch(datesBooked, data);
+      }
+    }
+  }, [datesBooked]);
 
   return (
     <div className="bookTOContainer">
       <h1>Book Time Off Here</h1>
+
       <Space>
         <DatePicker.RangePicker
           picker="date"
           onChange={(dates: any) => handleDate(dates)}
         />
-        <Button onClick={(e) => handleClick(e)} type="primary">
+        <Button onClick={(e) => handleClick(e.preventDefault)} type="primary">
           Submit Request
         </Button>
       </Space>
