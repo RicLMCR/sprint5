@@ -37,6 +37,7 @@ const BookTO = ({
   const [hoursArray, setHoursArray] = useState<number[]>([]);
   const [datesArray, setDatesArray] = useState<Object[]>([]);
   const [datesArray2, setDatesArray2] = useState<Object[]>([]);
+  const [defaultHours, setDefaultHours] = useState<number | undefined>();
   //pass date start/end to state
   const handleDate: Function = (dates: any) => {
     setDateOne(dates[0]._d);
@@ -56,7 +57,6 @@ const BookTO = ({
       //for each date within the range, push object (containing date, day, id and hours) to temp array
       while (date <= dateTwo!) {
         getDay = date.toString().substring(0, 3);
-        // console.log(getDay, "I am day");
         const newDate = new Date(date).toISOString().split("T")[0];
         dates.push({ date: newDate, id: id, day: getDay });
         date.setDate(date.getDate() + 1);
@@ -86,23 +86,37 @@ const BookTO = ({
   //Post booking
   const handleSubmitBooking = () => {
     //! verify user id available
-    // if (data) {
-    //   if (datesBooked) {
-    //     getFetch(datesBooked, data);
-    //     console.log("handleSubmitBook", datesBooked, data);
-    //   }
-    // }
-    // if (datesBooked) {
-    //   getFetch(datesBooked, data);
-    //   console.log("handleSubmitBook", datesBooked, data);
-    // }
-    // for (let i = 0; i < datesBooked.length; i++) {
     if ("hours" in datesBooked[datesBooked.length - 1]) {
       getFetch(datesBooked, data);
-      console.log(datesBooked, "LOOOOOOOOP");
     }
-    // }
   };
+
+  //Hours Default Value
+  let hours: number;
+
+  // if (datesBooked) {
+  //   for (let i = 0; i < datesBooked.length; i++) {
+  //     let today = datesBooked[i].day;
+
+  //     switch (today) {
+  //       case "Sun":
+  //       case "Sat":
+  //         hours = 0;
+
+  //         break;
+  //       case "Mon":
+  //       case "Tue":
+  //       case "Wed":
+  //       case "Thu":
+  //         hours = 8;
+  //         break;
+  //       case "Fri":
+  //         hours = 5;
+
+  //         break;
+  //     }
+  //   }
+  // }
 
   return (
     <div className="bookTOContainer">
@@ -121,22 +135,44 @@ const BookTO = ({
         {bookBoolean ? (
           <div>
             <h2>You have requested:</h2>{" "}
-            {datesBooked.map((date: any, index: any) => (
-              <div className="dateBookingList" key={index}>
-                <p>
-                  Date {index} is: {date.date}
-                </p>
-                <p>Enter Hours</p>
-                <input
-                  className="dateBookingHoursInput"
-                  type="number"
-                  max="24"
-                  min="0"
-                  onChange={(e) => handleHours(e.target.value, index)}
-                  required
-                />
-              </div>
-            ))}
+            {datesBooked.map((date: any, index: any) => {
+              if (datesBooked) {
+                switch (date.day) {
+                  case "Sun":
+                  case "Sat":
+                    hours = 0;
+
+                    break;
+                  case "Mon":
+                  case "Tue":
+                  case "Wed":
+                  case "Thu":
+                    hours = 8;
+                    break;
+                  case "Fri":
+                    hours = 5;
+
+                    break;
+                }
+              }
+              return date.day === "Sat" || date.day === "Sun" ? null : (
+                <div className="dateBookingList" key={index}>
+                  <p>
+                    {date.day} - {date.date}
+                  </p>
+                  <p>Enter Hours</p>
+                  <input
+                    className="dateBookingHoursInput"
+                    type="number"
+                    max="24"
+                    min="0"
+                    onChange={(e) => handleHours(e.target.value, index)}
+                    defaultValue={hours}
+                    required
+                  />
+                </div>
+              );
+            })}
             <div className="bookingButtonContainer">
               <button
                 className="dateBookingButtons buttonSubmit"
