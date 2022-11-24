@@ -83,10 +83,10 @@ const BookTO = ({
 
   //Post booking
   const handleSubmitBooking = () => {
-    //! verify user id available
     if ("hours" in datesBooked[datesBooked.length - 1]) {
       getFetch(datesBooked, data);
     }
+    //! verify user id available
     console.log("handlesubmit", datesBooked, data);
     setBookBoolean(false);
   };
@@ -131,6 +131,8 @@ const BookTO = ({
                     break;
                 }
               }
+              date.hours = hours;
+              // setDatesArray(datesBooked);
               return date.day === "Sat" || date.day === "Sun" ? null : (
                 <div className="dateBookingList" key={index}>
                   <p>
