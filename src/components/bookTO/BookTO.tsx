@@ -195,12 +195,12 @@ const BookTO = ({
             </div>
 
           </div>
-        </div>
+
       ) : (
         ""
       )}
     </div>
-  );
-};
+  )
+}
 
 export default BookTO;
