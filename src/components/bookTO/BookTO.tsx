@@ -56,7 +56,6 @@ const BookTO = ({
       //for each date within the range, push object (containing date, day, id and hours) to temp array
       while (date <= dateTwo!) {
         getDay = date.toString().substring(0, 3);
-        // console.log(getDay, "I am day");
         const newDate = new Date(date).toISOString().split("T")[0];
         dates.push({ date: newDate, id: id, day: getDay });
         date.setDate(date.getDate() + 1);
@@ -80,26 +79,12 @@ const BookTO = ({
     console.log("handle hours", hours, id);
     datesBooked[id].hours = hours;
     setDatesArray(datesBooked);
-    console.log(datesArray, "I AM DATES ARAYYYYYYYY");
   };
 
   //Post booking
   const handleSubmitBooking = () => {
-    //! verify user id available
-    // if (data) {
-    //   if (datesBooked) {
-    //     getFetch(datesBooked, data);
-    //     console.log("handleSubmitBook", datesBooked, data);
-    //   }
-    // }
-    // if (datesBooked) {
-    //   getFetch(datesBooked, data);
-    //   console.log("handleSubmitBook", datesBooked, data);
-    // }
-    // for (let i = 0; i < datesBooked.length; i++) {
     if ("hours" in datesBooked[datesBooked.length - 1]) {
       getFetch(datesBooked, data);
-      console.log(datesBooked, "LOOOOOOOOP");
     }
     // }
   };
@@ -124,13 +109,13 @@ const BookTO = ({
             {datesBooked.map((date: any, index: any) => (
               <div className="dateBookingList" key={index}>
                 <p>
-                  Date {index} is: {date.date}
+                  {date.day} {date.date}
                 </p>
                 <p>Enter Hours</p>
                 <input
                   className="dateBookingHoursInput"
                   type="number"
-                  max="24"
+                  max="8"
                   min="0"
                   onChange={(e) => handleHours(e.target.value, index)}
                   required
