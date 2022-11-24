@@ -87,7 +87,8 @@ const BookTO = ({
     if ("hours" in datesBooked[datesBooked.length - 1]) {
       getFetch(datesBooked, data);
     }
-    console.log("handlesubmit", datesBooked, data)
+    console.log("handlesubmit", datesBooked, data);
+    setBookBoolean(false);
   };
 
   //Hours Default Value
