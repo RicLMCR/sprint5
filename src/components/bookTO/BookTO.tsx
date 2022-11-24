@@ -77,6 +77,7 @@ const BookTO = ({
   //Add selected hours to booking object
   const handleHours: Function = (hours: number, id: number) => {
     console.log("handle hours", hours, id);
+    //create hours property and populate
     datesBooked[id].hours = hours;
     setDatesArray(datesBooked);
   };
@@ -86,61 +87,70 @@ const BookTO = ({
     if ("hours" in datesBooked[datesBooked.length - 1]) {
       getFetch(datesBooked, data);
     }
-    // }
   };
 
   return (
-    <div className="bookTOContainer">
-      <h1>Book Time Off Here</h1>
+    <div>
+      {/* Check that user is logged in before rendering calendar */}
+      {data ? (
+        <div className="bookTOContainer">
+          <h1>Book Time Off Here</h1>
 
-      <Space>
-        <DatePicker.RangePicker
-          picker="date"
-          onChange={(dates: any) => handleDate(dates)}
-        />
-        <button className="dateBookingButtons" onClick={(e) => handleDates(e)}>
-          Confirm Dates
-        </button>
-      </Space>
-      <div className="datesList">
-        {bookBoolean ? (
-          <div>
-            <h2>You have requested:</h2>{" "}
-            {datesBooked.map((date: any, index: any) => (
-              <div className="dateBookingList" key={index}>
-                <p>
-                  {date.day} {date.date}
-                </p>
-                <p>Enter Hours</p>
-                <input
-                  className="dateBookingHoursInput"
-                  type="number"
-                  max="8"
-                  min="0"
-                  onChange={(e) => handleHours(e.target.value, index)}
-                  required
-                />
+          <Space>
+            <DatePicker.RangePicker
+              picker="date"
+              onChange={(dates: any) => handleDate(dates)}
+            />
+            <button
+              className="dateBookingButtons"
+              onClick={(e) => handleDates(e)}
+            >
+              Confirm Dates
+            </button>
+          </Space>
+          <div className="datesList">
+            {bookBoolean ? (
+              <div>
+                <h2>You have requested:</h2>{" "}
+                {datesBooked.map((date: any, index: any) => (
+                  <div className="dateBookingList" key={index}>
+                    <p>
+                      {date.day} {date.date}
+                    </p>
+                    <p>Enter Hours</p>
+                    <input
+                      className="dateBookingHoursInput"
+                      type="number"
+                      max="8"
+                      min="0"
+                      onChange={(e) => handleHours(e.target.value, index)}
+                      required
+                    />
+                  </div>
+                ))}
+                <div className="bookingButtonContainer">
+                  <button
+                    className="dateBookingButtons buttonSubmit"
+                    onClick={handleSubmitBooking}
+                  >
+                    Submit
+                  </button>
+                  <button
+                    className="dateBookingButtons buttonCancel"
+                    onClick={() => setBookBoolean(false)}
+                  >
+                    Cancel
+                  </button>
+                </div>
               </div>
-            ))}
-            <div className="bookingButtonContainer">
-              <button
-                className="dateBookingButtons buttonSubmit"
-                onClick={handleSubmitBooking}
-              >
-                Submit
-              </button>
-              <button
-                className="dateBookingButtons buttonCancel"
-                onClick={() => setBookBoolean(false)}
-              >
-                Cancel
-              </button>
-            </div>
+            ) : (
+              ""
+            )}
           </div>
-        ) : (
-          ""
-        )}
-      </div>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
