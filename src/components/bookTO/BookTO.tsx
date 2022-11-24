@@ -89,10 +89,7 @@ const BookTO = ({
     //! verify user id available
     console.log("handlesubmit", datesBooked, data);
     setBookBoolean(false);
-    // pop up
-  alert("Congrats on your bookings!")
-  console.log("Congrats on your bookings!")
-  };
+  }
 
   //Hours Default Value
   let hours: number;
@@ -167,9 +164,9 @@ const BookTO = ({
             <div className="bookingButtonContainer">
               <button
                 className="dateBookingButtons buttonSubmit"
-                onClick={handleSubmitBooking}
+                onClick={handleSubmitBooking} // This Should Trigger Model Pop Up (Can just put modal in {})
               >
-                Submit
+                Submit 
               </button>
               <button
                 className="dateBookingButtons buttonCancel"
