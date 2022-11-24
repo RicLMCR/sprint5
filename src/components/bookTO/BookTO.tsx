@@ -45,7 +45,6 @@ const BookTO = ({
   };
 
   //Calculate dates within booking range
-
   const getDatesInRange = (dateOne: Date, dateTwo: Date) => {
     //if both date states are true then create dates to fill
     if (dateOne && dateTwo) {
