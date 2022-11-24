@@ -10,15 +10,12 @@ function App() {
   //user information on login
   const [data, setData] = useState<any>("");
 
-  const [datesBooked, setDatesBooked] = useState<any>([]);
-
   //booking information
   const [datesBooked, setDatesBooked] = useState<any>([]);
   const [dateOne, setDateOne] = useState<Date>();
   const [dateTwo, setDateTwo] = useState<Date>();
   const [bookBoolean, setBookBoolean] = useState<Boolean>(false);
   const [getDay, setGetDay] = useState<string>("");
-
 
   useEffect(() => {}, [datesBooked]);
 

@@ -78,16 +78,14 @@ const BookTO = ({
   //Add selected hours to booking object
   const handleHours: Function = (hours: number, id: number) => {
     console.log("handle hours", hours, id);
-    //create hours property and populate
     datesBooked[id].hours = hours;
     setDatesArray(datesBooked);
+    console.log(datesArray, "I AM DATES ARAYYYYYYYY");
   };
 
   //Post booking
   const handleSubmitBooking = () => {
-
     //! verify user id available
-
     if ("hours" in datesBooked[datesBooked.length - 1]) {
       getFetch(datesBooked, data);
     }
@@ -121,12 +119,8 @@ const BookTO = ({
   // }
 
   return (
-    <div>
-      {/* Check that user is logged in before rendering calendar */}
-      {data ? (
-        <div className="bookTOContainer">
-          <h1>Book Time Off Here</h1>
-
+    <div className="bookTOContainer">
+      <h1>Book Time Off Here</h1>
 
       <Space>
         <DatePicker.RangePicker
@@ -193,14 +187,13 @@ const BookTO = ({
                 Cancel
               </button>
             </div>
-
           </div>
-
-      ) : (
-        ""
-      )}
+        ) : (
+          ""
+        )}
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default BookTO;
