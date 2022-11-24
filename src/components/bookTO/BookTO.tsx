@@ -132,24 +132,34 @@ const BookTO = ({
                 }
               }
               date.hours = hours;
-              // setDatesArray(datesBooked);
-              return date.day === "Sat" || date.day === "Sun" ? null : (
-                <div className="dateBookingList" key={index}>
-                  <p>
-                    {date.day} - {date.date}
-                  </p>
-                  <p>Enter Hours</p>
-                  <input
-                    className="dateBookingHoursInput"
-                    type="number"
-                    max="24"
-                    min="0"
-                    onChange={(e) => handleHours(e.target.value, index)}
-                    defaultValue={hours}
-                    required
-                  />
-                </div>
-              );
+
+              //Max hours
+              let maxHour: number;
+              if (date.day === "Fri") {
+                maxHour = 5;
+              } else if (date.day === "Sat" || date.day === "Sun") {
+                maxHour = 0;
+              } else {
+                maxHour = 8;
+              }
+              if (date.day)
+                return date.day === "Sat" || date.day === "Sun" ? null : (
+                  <div className="dateBookingList" key={index}>
+                    <p>
+                      {date.day} - {date.date}
+                    </p>
+                    <p>Enter Hours</p>
+                    <input
+                      className="dateBookingHoursInput"
+                      type="number"
+                      max={maxHour}
+                      min="0"
+                      onChange={(e) => handleHours(e.target.value, index)}
+                      defaultValue={hours}
+                      required
+                    />
+                  </div>
+                );
             })}
             <div className="bookingButtonContainer">
               <button
