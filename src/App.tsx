@@ -22,22 +22,24 @@ function App() {
   return (
     <div className="App">
       <Navbar setData={setData} data={data} />
-      <UserInfo toAllowance={data} />
-      {data ? (
-        <BookTO
-          dateOne={dateOne!}
-          setDateOne={setDateOne}
-          dateTwo={dateTwo!}
-          setDateTwo={setDateTwo}
-          datesBooked={datesBooked}
-          setDatesBooked={setDatesBooked}
-          bookBoolean={bookBoolean}
-          setBookBoolean={setBookBoolean}
-          data={data}
-          setGetDay={setGetDay}
-          getDay={getDay}
-        />
-      ) : null}
+      <div className="bodyContent">
+        <UserInfo toAllowance={data} />
+        {data ? (
+          <BookTO
+            dateOne={dateOne!}
+            setDateOne={setDateOne}
+            dateTwo={dateTwo!}
+            setDateTwo={setDateTwo}
+            datesBooked={datesBooked}
+            setDatesBooked={setDatesBooked}
+            bookBoolean={bookBoolean}
+            setBookBoolean={setBookBoolean}
+            data={data}
+            setGetDay={setGetDay}
+            getDay={getDay}
+          />
+        ) : null}
+      </div>
     </div>
   );
 }

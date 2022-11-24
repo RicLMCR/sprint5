@@ -80,7 +80,6 @@ const BookTO = ({
     console.log("handle hours", hours, id);
     datesBooked[id].hours = hours;
     setDatesArray(datesBooked);
-    console.log(datesArray, "I AM DATES ARAYYYYYYYY");
   };
 
   //Post booking
@@ -89,34 +88,11 @@ const BookTO = ({
     if ("hours" in datesBooked[datesBooked.length - 1]) {
       getFetch(datesBooked, data);
     }
+    console.log("handlesubmit", datesBooked, data)
   };
 
   //Hours Default Value
   let hours: number;
-
-  // if (datesBooked) {
-  //   for (let i = 0; i < datesBooked.length; i++) {
-  //     let today = datesBooked[i].day;
-
-  //     switch (today) {
-  //       case "Sun":
-  //       case "Sat":
-  //         hours = 0;
-
-  //         break;
-  //       case "Mon":
-  //       case "Tue":
-  //       case "Wed":
-  //       case "Thu":
-  //         hours = 8;
-  //         break;
-  //       case "Fri":
-  //         hours = 5;
-
-  //         break;
-  //     }
-  //   }
-  // }
 
   return (
     <div className="bookTOContainer">
