@@ -37,6 +37,7 @@ const BookTO = ({
   const [hoursArray, setHoursArray] = useState<number[]>([]);
   const [datesArray, setDatesArray] = useState<Object[]>([]);
   const [datesArray2, setDatesArray2] = useState<Object[]>([]);
+  const [defaultHours, setDefaultHours] = useState<number | undefined>();
   //pass date start/end to state
   const handleDate: Function = (dates: any) => {
     setDateOne(dates[0]._d);
@@ -84,10 +85,40 @@ const BookTO = ({
 
   //Post booking
   const handleSubmitBooking = () => {
+
+    //! verify user id available
+
     if ("hours" in datesBooked[datesBooked.length - 1]) {
       getFetch(datesBooked, data);
     }
   };
+
+  //Hours Default Value
+  let hours: number;
+
+  // if (datesBooked) {
+  //   for (let i = 0; i < datesBooked.length; i++) {
+  //     let today = datesBooked[i].day;
+
+  //     switch (today) {
+  //       case "Sun":
+  //       case "Sat":
+  //         hours = 0;
+
+  //         break;
+  //       case "Mon":
+  //       case "Tue":
+  //       case "Wed":
+  //       case "Thu":
+  //         hours = 8;
+  //         break;
+  //       case "Fri":
+  //         hours = 5;
+
+  //         break;
+  //     }
+  //   }
+  // }
 
   return (
     <div>
@@ -96,56 +127,73 @@ const BookTO = ({
         <div className="bookTOContainer">
           <h1>Book Time Off Here</h1>
 
-          <Space>
-            <DatePicker.RangePicker
-              picker="date"
-              onChange={(dates: any) => handleDate(dates)}
-            />
-            <button
-              className="dateBookingButtons"
-              onClick={(e) => handleDates(e)}
-            >
-              Confirm Dates
-            </button>
-          </Space>
-          <div className="datesList">
-            {bookBoolean ? (
-              <div>
-                <h2>You have requested:</h2>{" "}
-                {datesBooked.map((date: any, index: any) => (
-                  <div className="dateBookingList" key={index}>
-                    <p>
-                      {date.day} {date.date}
-                    </p>
-                    <p>Enter Hours</p>
-                    <input
-                      className="dateBookingHoursInput"
-                      type="number"
-                      max="8"
-                      min="0"
-                      onChange={(e) => handleHours(e.target.value, index)}
-                      required
-                    />
-                  </div>
-                ))}
-                <div className="bookingButtonContainer">
-                  <button
-                    className="dateBookingButtons buttonSubmit"
-                    onClick={handleSubmitBooking}
-                  >
-                    Submit
-                  </button>
-                  <button
-                    className="dateBookingButtons buttonCancel"
-                    onClick={() => setBookBoolean(false)}
-                  >
-                    Cancel
-                  </button>
+
+      <Space>
+        <DatePicker.RangePicker
+          picker="date"
+          onChange={(dates: any) => handleDate(dates)}
+        />
+        <button className="dateBookingButtons" onClick={(e) => handleDates(e)}>
+          Confirm Dates
+        </button>
+      </Space>
+      <div className="datesList">
+        {bookBoolean ? (
+          <div>
+            <h2>You have requested:</h2>{" "}
+            {datesBooked.map((date: any, index: any) => {
+              if (datesBooked) {
+                switch (date.day) {
+                  case "Sun":
+                  case "Sat":
+                    hours = 0;
+
+                    break;
+                  case "Mon":
+                  case "Tue":
+                  case "Wed":
+                  case "Thu":
+                    hours = 8;
+                    break;
+                  case "Fri":
+                    hours = 5;
+
+                    break;
+                }
+              }
+              return date.day === "Sat" || date.day === "Sun" ? null : (
+                <div className="dateBookingList" key={index}>
+                  <p>
+                    {date.day} - {date.date}
+                  </p>
+                  <p>Enter Hours</p>
+                  <input
+                    className="dateBookingHoursInput"
+                    type="number"
+                    max="24"
+                    min="0"
+                    onChange={(e) => handleHours(e.target.value, index)}
+                    defaultValue={hours}
+                    required
+                  />
                 </div>
-              </div>
-            ) : (
-              ""
-            )}
+              );
+            })}
+            <div className="bookingButtonContainer">
+              <button
+                className="dateBookingButtons buttonSubmit"
+                onClick={handleSubmitBooking}
+              >
+                Submit
+              </button>
+              <button
+                className="dateBookingButtons buttonCancel"
+                onClick={() => setBookBoolean(false)}
+              >
+                Cancel
+              </button>
+            </div>
+
           </div>
         </div>
       ) : (
