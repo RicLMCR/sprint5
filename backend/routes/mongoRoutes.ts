@@ -13,7 +13,7 @@ router.post('/users', createUser);
 router.post('/bookings', createBooking);
 
 // Get all bookings for user
-//router.get('/:userId/booking', getBookings);
+router.get('/bookings/userId/:userId', getBookings);
 
 // Update booked holiday
 

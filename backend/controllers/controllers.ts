@@ -62,10 +62,16 @@ const createBooking = async (
 
 // Get all bookings for user - this is a GET request
 const getBookings = async (req: Request, res: Response): Promise<Response> => {
-  const { _id } = req.params;
-  const bookings = await bookingModel.find({ _id });
-  return res.status(200).json(bookings);
-};
+  const { userId } = req.params;
+  // check if userId exists from params
+  if (userId === undefined) {
+    return res.status(400).json({ message: "No userId provided" });
+  } else {
+    const bookings = await bookingModel.find({ userId });
+    console.log(bookings);
+    return res.status(200).json(bookings);
+  };
+}
 
 //export
 module.exports = {
