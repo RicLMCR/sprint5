@@ -5,15 +5,13 @@ import Navbar from "./components/navBar/Navbar";
 import { useState } from "react";
 import UserInfo from "./components/userInfo/UserInfo";
 import BookTO from "./components/bookTO/BookTO";
-import SamsComponent from "./components/samsComponent/SamsComponent";
 
 function App() {
   //user information on login
   const [data, setData] = useState<any>("");
-  const [datesBooked, setDatesBooked] = useState<any>([]);
-
 
   //booking information
+  const [datesBooked, setDatesBooked] = useState<any>([]);
   const [dateOne, setDateOne] = useState<Date>();
   const [dateTwo, setDateTwo] = useState<Date>();
   const [bookBoolean, setBookBoolean] = useState<Boolean>(false);
@@ -26,10 +24,9 @@ function App() {
 
   //console.log(data._id, " I am _id");
 
-  console.log("datesbooked", datesBooked)
+  console.log("datesbooked", datesBooked);
 
-  useEffect(()=>{
-  },[datesBooked]);
+  useEffect(() => {}, [datesBooked]);
 
   return (
     <div className="App">
