@@ -92,10 +92,12 @@ const BookTO = ({
     //! verify user id available
     console.log("handlesubmit", datesBooked, data);
     setBookBoolean(false);
+    
     // pop up
     alert("Congrats on your bookings!")
     console.log("Congrats on your bookings!")
   };
+
 
   //Hours Default Value
   let hours: number;
@@ -144,6 +146,7 @@ const BookTO = ({
                   }
                 }
                 date.hours = hours;
+
 
                 //Max hours
                 let maxHour: number;
