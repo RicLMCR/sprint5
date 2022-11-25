@@ -3,7 +3,7 @@
   max-width: 100vw;
 }
 
-.bodyContent{
+.bodyContent {
   display: flex;
   justify-content: flex-start;
 }
@@ -90,6 +90,7 @@
   width: 30vw;
   justify-content: flex-start;
 }
+
 .signInContainer {
   /* border: red solid 2px; */
   width: 10%;

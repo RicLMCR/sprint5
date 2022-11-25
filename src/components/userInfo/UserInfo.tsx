@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { deflateSync } from "zlib";
+import ClipLoader from 'react-spinners/ClipLoader';
 import "./userInfo.css";
 
-const UserInfo = ({ data }: any) => {
-
+const UserInfo = ({ data, loading }: any) => {
   // fetch holidays from booking collection
   const [holidays, setHolidays] = useState<any>([]);
+
 
   // fetch from booking collection
   const handleHolidays = async () => {
@@ -13,45 +13,52 @@ const UserInfo = ({ data }: any) => {
       .then((res) => res.json())
       .then((data) => setHolidays(data));
 
+    console.log(holidays);
   };
 
+  if (loading === true) {
+    return (
+      <div className="loading-circle">
+        <ClipLoader color={'#000000'} size={50} />
+      </div>
+    );
+  } else {
+    return (
+      <div className="userInfoContainer">
+        {data ? (
+          <div>
+            <h1>User information</h1>
+            <h2><b>Total Time Off Allowance (hours)</b></h2>
+            <p>{data.timeOff.PTO.allowance}</p>
 
+            <h2>Time Off Available</h2>
+            <p>{data.timeOff.PTO.available}</p>
 
-  return (
-    <div className="userInfoContainer">
-      {data ? (
-        <div>
-          <h1>User Holiday Info Here</h1>
-          <h2>Total Time Off Allowance (hours)</h2>
-          <p>{data.timeOff.PTO.allowance}</p>
+            <h2>Hours booked</h2>
+            <p>{data.timeOff.PTO.booked}</p>
 
-          <h2>Time Off Available</h2>
-          <p>{data.timeOff.PTO.available}</p>
+            <h2>Dates booked:</h2>
+            {holidays.map((index: any) => {
+              return (
+                <div key={index} style={{ flexDirection: 'row' }}>
+                  <p>{holidays[0].dates[0].date + ' =>'}
+                    {holidays[0].dates[holidays[0].dates.length - 1].date}</p>
+                </div>
+              )
+            })}
 
-          <h2>Hours booked</h2>
-          <p>{data.timeOff.PTO.booked}</p>
-          <input className="button-nav" type="submit" value="Holidays" onClick={handleHolidays} />
+          </div>
 
-          {holidays.map(({ dates: { date } }: any) => {
-            console.log(holidays);
-            return (
-              <div>
-                <p>{date}</p>
-              </div>
-            )
-          })}
-
-
-
-        </div>
-      ) : (
-        <div>
-          {" "}
-          <h2>Sign in</h2>
-        </div>
-      )}
-    </div>
-  );
+        ) : (
+          <div>
+            {" "}
+            <h2>Sign in</h2>
+          </div>
+        )}
+        <input className="button-nav" type="submit" value="Holidays" onClick={handleHolidays} />
+      </div>
+    );
+  }
 };
 
 export default UserInfo;

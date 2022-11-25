@@ -17,6 +17,10 @@ function App() {
   const [bookBoolean, setBookBoolean] = useState<Boolean>(false);
   const [getDay, setGetDay] = useState<string>("");
   const [userBookings, setUserBookings] = useState<any>();
+  const [loading, setLoading] = useState<boolean>(false);
+
+  //  console.log(datesBooked);
+
 
 
 
@@ -25,9 +29,9 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar setData={setData} data={data} setUserBookings={setUserBookings} userBookings={userBookings} />
+      <Navbar setData={setData} data={data} setUserBookings={setUserBookings} userBookings={userBookings} setLoading={setLoading} />
       <div className="bodyContent">
-        <UserInfo data={data} userBookings={userBookings} />
+        <UserInfo data={data} userBookings={userBookings} loading={loading} />
         {data ? (
           <BookTO
             dateOne={dateOne!}
@@ -41,6 +45,7 @@ function App() {
             data={data}
             setGetDay={setGetDay}
             getDay={getDay}
+            loading={loading}
           />
         ) : null}
       </div>
