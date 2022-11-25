@@ -4,6 +4,7 @@ import "./bookTO.css";
 import { getFetch } from "../fetchRequests/FetchReq";
 import { logDOM } from "@testing-library/react";
 import { useState } from "react";
+import ClipLoader from 'react-spinners/ClipLoader';
 
 //Prop Interface
 interface MyProps {
@@ -18,6 +19,7 @@ interface MyProps {
   data: any;
   setGetDay: React.Dispatch<React.SetStateAction<string>>;
   getDay: string;
+  loading: boolean;
 }
 
 //booking component
@@ -33,6 +35,7 @@ const BookTO = ({
   data,
   setGetDay,
   getDay,
+  loading
 }: MyProps) => {
   const [hoursArray, setHoursArray] = useState<number[]>([]);
   const [datesArray, setDatesArray] = useState<Object[]>([]);
@@ -89,99 +92,112 @@ const BookTO = ({
     //! verify user id available
     console.log("handlesubmit", datesBooked, data);
     setBookBoolean(false);
-  }
+    
+    // pop up
+    alert("Congrats on your bookings!")
+    console.log("Congrats on your bookings!")
+  };
+
 
   //Hours Default Value
   let hours: number;
 
-  return (
-    <div className="bookTOContainer">
-      <h1>Book Time Off Here</h1>
-
-      <Space>
-        <DatePicker.RangePicker
-          picker="date"
-          onChange={(dates: any) => handleDate(dates)}
-        />
-        <button className="dateBookingButtons" onClick={(e) => handleDates(e)}>
-          Confirm Dates
-        </button>
-      </Space>
-      <div className="datesList">
-        {bookBoolean ? (
-          <div>
-            <h2>You have requested:</h2>{" "}
-            {datesBooked.map((date: any, index: any) => {
-              if (datesBooked) {
-                switch (date.day) {
-                  case "Sun":
-                  case "Sat":
-                    hours = 0;
-
-                    break;
-                  case "Mon":
-                  case "Tue":
-                  case "Wed":
-                  case "Thu":
-                    hours = 8;
-                    break;
-                  case "Fri":
-                    hours = 5;
-
-                    break;
-                }
-              }
-              date.hours = hours;
-
-              //Max hours
-              let maxHour: number;
-              if (date.day === "Fri") {
-                maxHour = 5;
-              } else if (date.day === "Sat" || date.day === "Sun") {
-                maxHour = 0;
-              } else {
-                maxHour = 8;
-              }
-              if (date.day)
-                return date.day === "Sat" || date.day === "Sun" ? null : (
-                  <div className="dateBookingList" key={index}>
-                    <p>
-                      {date.day} - {date.date}
-                    </p>
-                    <p>Enter Hours</p>
-                    <input
-                      className="dateBookingHoursInput"
-                      type="number"
-                      max={maxHour}
-                      min="0"
-                      onChange={(e) => handleHours(e.target.value, index)}
-                      defaultValue={hours}
-                      required
-                    />
-                  </div>
-                );
-            })}
-            <div className="bookingButtonContainer">
-              <button
-                className="dateBookingButtons buttonSubmit"
-                onClick={handleSubmitBooking} // This Should Trigger Model Pop Up (Can just put modal in {})
-              >
-                Submit 
-              </button>
-              <button
-                className="dateBookingButtons buttonCancel"
-                onClick={() => setBookBoolean(false)}
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        ) : (
-          ""
-        )}
+  if (loading === true) {
+    return (
+      <div className="loading-circle">
+        <ClipLoader color={'#000000'} size={50} />
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div className="bookTOContainer">
+        <h1>Book Time Off Here</h1>
+        <Space>
+          <DatePicker.RangePicker
+            picker="date"
+            onChange={(dates: any) => handleDate(dates)}
+          />
+          <button className="dateBookingButtons" onClick={(e) => handleDates(e)}>
+            Confirm Dates
+          </button>
+        </Space>
+        <div className="datesList">
+          {bookBoolean ? (
+            <div>
+              <h2>You have requested:</h2>{" "}
+              {datesBooked.map((date: any, index: any) => {
+                if (datesBooked) {
+                  switch (date.day) {
+                    case "Sun":
+                    case "Sat":
+                      hours = 0;
+
+                      break;
+                    case "Mon":
+                    case "Tue":
+                    case "Wed":
+                    case "Thu":
+                      hours = 8;
+                      break;
+                    case "Fri":
+                      hours = 5;
+
+                      break;
+                  }
+                }
+                date.hours = hours;
+
+
+                //Max hours
+                let maxHour: number;
+                if (date.day === "Fri") {
+                  maxHour = 5;
+                } else if (date.day === "Sat" || date.day === "Sun") {
+                  maxHour = 0;
+                } else {
+                  maxHour = 8;
+                }
+                if (date.day)
+                  return date.day === "Sat" || date.day === "Sun" ? null : (
+                    <div className="dateBookingList" key={index}>
+                      <p>
+                        {date.day} - {date.date}
+                      </p>
+                      <p>Enter Hours</p>
+                      <input
+                        className="dateBookingHoursInput"
+                        type="number"
+                        max={maxHour}
+                        min="0"
+                        onChange={(e) => handleHours(e.target.value, index)}
+                        defaultValue={hours}
+                        required
+                      />
+                    </div>
+                  );
+              })}
+              <div className="bookingButtonContainer">
+                <button
+                  className="dateBookingButtons buttonSubmit"
+                  onClick={handleSubmitBooking}
+                >
+                  Submit
+                </button>
+                <button
+                  className="dateBookingButtons buttonCancel"
+                  onClick={() => setBookBoolean(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
+      </div>
+    );
+  }
 };
 
 export default BookTO;

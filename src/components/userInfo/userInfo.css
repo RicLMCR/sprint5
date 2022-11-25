@@ -1,4 +1,4 @@
-.userInfoContainer{
+.userInfoContainer {
     width: 25%;
     height: 80vh;
     display: flex;
@@ -11,3 +11,9 @@
 }
 
 
+.loading-circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
