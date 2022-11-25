@@ -9,6 +9,7 @@ interface MyProps {
   setData: React.Dispatch<React.SetStateAction<string>>;
   setHandleModal: React.Dispatch<React.SetStateAction<boolean>>;
   handleModal: boolean;
+
 }
 
 //! Function
@@ -16,7 +17,6 @@ const NavModal = ({
   handleLogOut,
   data,
   setData,
-  setHandleModal,
   handleModal,
 }: MyProps): any => {
   // States
@@ -59,7 +59,7 @@ const NavModal = ({
     fetch(`/api/users/userName/${userName}/userPassword/${userPassword}`)
       .then((res) => res.json())
       .then((data) => setData(data));
-    console.log(data.userId);
+    console.log(data);
     setUsername("");
   };
 

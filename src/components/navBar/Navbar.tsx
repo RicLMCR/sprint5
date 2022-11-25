@@ -7,6 +7,8 @@ import NavModal from "./NavModal";
 interface MyProps {
   data: any;
   setData: any;
+  setUserBookings: any,
+  userBookings: any
 }
 // Pass data to app.tsx
 const Navbar = ({ setData, data }: MyProps) => {
