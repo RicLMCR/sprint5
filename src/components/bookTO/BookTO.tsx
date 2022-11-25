@@ -77,7 +77,7 @@ const BookTO = ({
       getDatesInRange(dateOne, dateTwo);
       setBookBoolean(true);
     } else {
-      console.log("please enter two dates");
+      alert("please enter two dates");
     }
   };
 
