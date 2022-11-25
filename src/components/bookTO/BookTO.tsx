@@ -4,7 +4,7 @@ import "./bookTO.css";
 import { getFetch } from "../fetchRequests/FetchReq";
 import { logDOM } from "@testing-library/react";
 import { useState } from "react";
-import ClipLoader from 'react-spinners/ClipLoader';
+import ClipLoader from "react-spinners/ClipLoader";
 
 //Prop Interface
 interface MyProps {
@@ -35,7 +35,7 @@ const BookTO = ({
   data,
   setGetDay,
   getDay,
-  loading
+  loading,
 }: MyProps) => {
   const [hoursArray, setHoursArray] = useState<number[]>([]);
   const [datesArray, setDatesArray] = useState<Object[]>([]);
@@ -73,8 +73,12 @@ const BookTO = ({
   //On submit, trigger date range calculation
   const handleDates: Function = (e: any) => {
     e.preventDefault();
-    getDatesInRange(dateOne, dateTwo);
-    setBookBoolean(true);
+    if (dateOne || dateTwo) {
+      getDatesInRange(dateOne, dateTwo);
+      setBookBoolean(true);
+    } else {
+      console.log("please enter two dates");
+    }
   };
 
   //Add selected hours to booking object
@@ -92,12 +96,15 @@ const BookTO = ({
     //! verify user id available
     console.log("handlesubmit", datesBooked, data);
     setBookBoolean(false);
-    
-    // pop up
-    alert("Congrats on your bookings!")
-    console.log("Congrats on your bookings!")
-  };
 
+    // pop up
+    alert("Congrats on your bookings!");
+    console.log("Congrats on your bookings!");
+
+    //clear date states
+    setDateOne(null);
+    setDateTwo(null);
+  };
 
   //Hours Default Value
   let hours: number;
@@ -105,7 +112,7 @@ const BookTO = ({
   if (loading === true) {
     return (
       <div className="loading-circle">
-        <ClipLoader color={'#000000'} size={50} />
+        <ClipLoader color={"#000000"} size={50} />
       </div>
     );
   } else {
@@ -117,7 +124,10 @@ const BookTO = ({
             picker="date"
             onChange={(dates: any) => handleDate(dates)}
           />
-          <button className="dateBookingButtons" onClick={(e) => handleDates(e)}>
+          <button
+            className="dateBookingButtons"
+            onClick={(e) => handleDates(e)}
+          >
             Confirm Dates
           </button>
         </Space>
@@ -146,7 +156,6 @@ const BookTO = ({
                   }
                 }
                 date.hours = hours;
-
 
                 //Max hours
                 let maxHour: number;
