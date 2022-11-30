@@ -1,6 +1,9 @@
+import Calendar from "../calendar/Calendar1";
+
 import { useEffect, useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import "./userInfo.css";
+import Calendar1 from "../calendar/Calendar1";
 
 const UserInfo = ({ data, loading }: any) => {
   // fetch holidays from booking collection
@@ -76,6 +79,8 @@ const UserInfo = ({ data, loading }: any) => {
           value="Holidays"
           onClick={handleHolidays}
         />
+        {/* Calendar Componenet */}
+        <Calendar1 />
       </div>
     );
   }
