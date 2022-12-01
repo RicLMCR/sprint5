@@ -10,7 +10,7 @@ export const getFetch = async (datesBooked: any, data: any) => {
   };
 
   try {
-    const response: any = await fetch(`/api/bookings/`,
+    const response: any = await fetch(`http://localhost:8000/api/bookings/`,
       requestOptions
     );
     const bookingData = await response.json();

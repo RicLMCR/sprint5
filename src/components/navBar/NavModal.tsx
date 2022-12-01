@@ -31,7 +31,7 @@ const NavModal = ({
   const handleCreate = (e: any) => {
     e.preventDefault();
 
-    fetch("/api/users/", {
+    fetch("http://localhost:8000/api/users/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -59,7 +59,7 @@ const NavModal = ({
   //Submit Function
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    fetch(`/api/users/userName/${userName}/userPassword/${userPassword}`)
+    fetch(`http://localhost:8000/api/users/userName/${userName}/userPassword/${userPassword}`)
       .then((res) => res.json())
       .then((data) => setData(data));
     console.log(data);

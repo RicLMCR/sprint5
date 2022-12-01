@@ -1,5 +1,7 @@
 FROM node:17-alpine
 
+RUN npm install -g nodemon
+
 # all commands will be done from this working directory - instead of root
 WORKDIR /app
 
@@ -13,6 +15,6 @@ RUN npm install
 #  second '.' means copy to same location noted above - /app
 COPY . .
 
-EXPOSE 4000
+EXPOSE 8000
 
-CMD ["node", "index.ts"]
+CMD ["nodemon", "index.ts"]
