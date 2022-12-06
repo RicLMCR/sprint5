@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useImperativeHandle, useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import "./userInfo.css";
 
-const UserInfo = ({ data, loading }: any) => {
+const UserInfo = ({ data, loading, bookBoolean }: any) => {
   // fetch holidays from booking collection
   const [holidays, setHolidays] = useState<any>([]);
 
@@ -14,6 +14,15 @@ const UserInfo = ({ data, loading }: any) => {
 
     console.log(holidays);
   };
+
+  // I want to fetch the user's data to update the component
+  useEffect(() => {
+    if (data.userId) {
+      setTimeout(() => {
+        handleHolidays();
+      }, 200);
+    }
+  }, [bookBoolean]);
 
   if (loading === true) {
     return (

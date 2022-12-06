@@ -1,6 +1,7 @@
 //! Imports
 import "../../App.css";
 import { useState } from "react";
+import { Interface } from "readline";
 
 
 //! Props Interface
@@ -25,7 +26,6 @@ const NavModal = ({
   const [userName, setUsername] = useState<string>("");
   const [userPassword, setPassword] = useState<string>("");
   const [userCreated, setUserCreated] = useState<any>("");
-
 
   // Post request to create new user
   const handleCreate = (e: any) => {
@@ -68,7 +68,6 @@ const NavModal = ({
     window.setTimeout(() => {
       setLoading(false);
     }, 1000);
-
   };
 
 

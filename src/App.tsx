@@ -31,7 +31,7 @@ function App() {
     <div className="App">
       <Navbar setData={setData} data={data} setUserBookings={setUserBookings} userBookings={userBookings} setLoading={setLoading} />
       <div className="bodyContent">
-        <UserInfo data={data} userBookings={userBookings} loading={loading} />
+        <UserInfo data={data} userBookings={userBookings} loading={loading} bookBoolean={bookBoolean} />
         {data ? (
           <BookTO
             dateOne={dateOne!}
