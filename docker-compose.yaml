@@ -4,9 +4,9 @@ services:
     build: ./backend
     container_name: ptobackend_c
     ports:
-      - '4000:4000'
+      - '8000:8000'
     volumes:
-      - ./api:/app
+      - ./backend:/app
       # outdated  - /Users/samfrith/VScode/Docker/Explore/Attempt1/api/node_modules
       - /Users/samfrith/Documents/GitHub/sprint5/backend/node_modules
   ptoapp:

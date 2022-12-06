@@ -1,15 +1,17 @@
 FROM node:19-alpine
 
+COPY package.json .
+
 RUN npm install -g nodemon
 
-WORKDIR /app
+RUN npm install -g cors
 
-COPY package.json .
+WORKDIR /app
 
 RUN npm install
 
 COPY . .
 
-EXPOSE 4000
+EXPOSE 8000
 
 CMD ["npm", "run", "dev"]

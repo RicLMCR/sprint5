@@ -8,7 +8,7 @@ const UserInfo = ({ data, loading }: any) => {
 
   // fetch from booking collection
   const handleHolidays = async () => {
-    fetch(`/api/bookings/userId/${data.userId}`)
+    fetch(`http://localhost:8000/api/bookings/userId/${data.userId}`)
       .then((res) => res.json())
       .then((data) => setHolidays(data));
 

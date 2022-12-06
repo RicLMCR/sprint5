@@ -1,5 +1,4 @@
 {
-  "proxy": "http://localhost:8000",
   "name": "sprint5",
   "version": "0.1.0",
   "private": true,
@@ -24,9 +23,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start2": "npm-run-all --parallel startsolo nodestart",
-    "nodestart": "cd ../backend && nodemon index.ts",
-    "start": "react-scripts start",
+    "start": "npm-run-all --parallel start1",
+    "start1": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
