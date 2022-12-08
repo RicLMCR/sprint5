@@ -27,7 +27,7 @@ const Navbar = ({ setData, data, setLoading }: MyProps) => {
       <div className="img-div">
         <img className="logo-nav" src={logo} alt="logo" />
       </div>
-      <h2 className="h1-nav">Paid Time Off </h2>
+      <h2 className="h1-nav">Paid Time off</h2>
       <h2 className="h1-nav">Logged in: {data.userName}</h2>
       <NavModal
         handleLogOut={handleLogOut}

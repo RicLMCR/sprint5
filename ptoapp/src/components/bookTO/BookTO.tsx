@@ -1,8 +1,7 @@
-import { Button, DatePicker, Space, TimePicker } from "antd";
-import "antd/dist/antd.css";
+import { DatePicker, Space } from "antd";
+import "antd/dist/antd.min.css";
 import "./bookTO.css";
 import { getFetch } from "../fetchRequests/FetchReq";
-import { logDOM } from "@testing-library/react";
 import { useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 
@@ -37,10 +36,10 @@ const BookTO = ({
   getDay,
   loading,
 }: MyProps) => {
-  const [hoursArray, setHoursArray] = useState<number[]>([]);
+  // const [hoursArray, setHoursArray] = useState<number[]>([]);
   const [datesArray, setDatesArray] = useState<Object[]>([]);
-  const [datesArray2, setDatesArray2] = useState<Object[]>([]);
-  const [defaultHours, setDefaultHours] = useState<number | undefined>();
+  // const [datesArray2, setDatesArray2] = useState<Object[]>([]);
+  // const [defaultHours, setDefaultHours] = useState<number | undefined>();
   //pass date start/end to state
   const handleDate: Function = (dates: any) => {
     setDateOne(dates[0]._d);
@@ -86,6 +85,7 @@ const BookTO = ({
     console.log("handle hours", hours, id);
     datesBooked[id].hours = hours;
     setDatesArray(datesBooked);
+    console.log(datesArray)
   };
 
   //Post booking

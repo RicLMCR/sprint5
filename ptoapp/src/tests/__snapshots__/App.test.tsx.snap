@@ -19,7 +19,7 @@ exports[`Tests that the app its self renders correctly  App renders correctly 1`
     <h2
       className="h1-nav"
     >
-      Paid Time Off 
+      Paid Time off
     </h2>
     <h2
       className="h1-nav"

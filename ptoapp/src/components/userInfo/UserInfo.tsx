@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import "./userInfo.css";
 
@@ -40,8 +40,8 @@ const UserInfo = ({ data, loading }: any) => {
 
             <h2>Dates booked:</h2>
             {holidays.map((item: any, index: number) => {
-              let dates12: any[] = [];
-              let incremented = 0;
+              // let dates12: any[] = [];
+              // let incremented = 0;
 
               for (let i = 0; i < item.length; i++) {
                 console.log(i);

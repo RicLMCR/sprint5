@@ -29,7 +29,8 @@
     "nodestart": "cd ./backend && nodemon index.ts",
     "start2": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "cd ./ptoapp && npm test",
+    "test1": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

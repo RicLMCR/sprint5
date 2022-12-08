@@ -24,10 +24,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "npm-run-all --parallel start1",
+    "start": "npm-run-all --parallel test1 start1",
     "start1": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test1": "CI=true npm run test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
