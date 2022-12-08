@@ -14,6 +14,7 @@ app.use("/api/", mongoRoutes);
 function connector() {
   mongoose
     .connect(
+      //hide user string with process.env
       "mongodb+srv://LouisNokes:Password123@cluster0.qqhb1.mongodb.net/?retryWrites=true&w=majority"
     )
     .then(() => {
