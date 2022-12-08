@@ -1,7 +1,8 @@
 import { useState } from "react";
 import "../../App.css";
-//import logo from "../../store86-logo.png";
 import NavModal from "./NavModal";
+
+let logo = require('./Store86-logo.png') 
 
 //Prop Interface
 interface MyProps {
@@ -25,7 +26,7 @@ const Navbar = ({ setData, data, setLoading }: MyProps) => {
   return (
     <div className="Nav-bar">
       <div className="img-div">
-        <img className="logo-nav" alt="logo" />
+        <img className="logo-nav" alt="logo" src={logo} />
       </div>
       <h2 className="h1-nav">Paid Time Off </h2>
       <h2 className="h1-nav">Logged in: {data.userName}</h2>
