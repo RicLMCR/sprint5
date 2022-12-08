@@ -16,7 +16,7 @@ cd ..
 
 printf "\nPull for backend completed" >> $log
 
-docker-compose up -d
+docker-compose up
 
 echo -e " Completed Pull from frontend\n Completed Pull from backend\n Completed Docker Compose process"
 
