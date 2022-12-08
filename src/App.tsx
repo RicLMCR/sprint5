@@ -20,11 +20,6 @@ function App() {
   const [loading, setLoading] = useState<boolean>(false);
 
   //  console.log(datesBooked);
-
-
-
-
-
   useEffect(() => { }, [datesBooked]);
 
   return (

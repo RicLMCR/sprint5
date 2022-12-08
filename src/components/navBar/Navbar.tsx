@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "../../App.css";
-import logo from "../../store86-logo.png";
+//import logo from "../../store86-logo.png";
 import NavModal from "./NavModal";
 
 //Prop Interface
@@ -25,7 +25,7 @@ const Navbar = ({ setData, data, setLoading }: MyProps) => {
   return (
     <div className="Nav-bar">
       <div className="img-div">
-        <img className="logo-nav" src={logo} alt="logo" />
+        <img className="logo-nav" alt="logo" />
       </div>
       <h2 className="h1-nav">Paid Time Off </h2>
       <h2 className="h1-nav">Logged in: {data.userName}</h2>
