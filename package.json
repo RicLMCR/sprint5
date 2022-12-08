@@ -25,7 +25,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "npm-run-all testauto --parallel startsolo nodestart",
+    "start": "npm-run-all testauto --parallel nodestart startsolo",
     "nodestart": "cd ./backend && nodemon index.ts",
     "startsolo": "react-scripts start",
     "build": "react-scripts build",
