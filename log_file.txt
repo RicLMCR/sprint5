@@ -1,0 +1,4 @@
+
+Pull from the front end complete
+Pull for backend completed
+Docker Compose has completed
