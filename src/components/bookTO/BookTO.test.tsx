@@ -16,6 +16,7 @@ describe("calendar render", (): any => {
   const data: any = "data";
   const getDay: any = "getDay";
   const setGetDay: any = "setGetDay";
+  const loading: boolean = false;
 
 
   it("should render", () => {
@@ -32,7 +33,7 @@ describe("calendar render", (): any => {
         data={data}
         getDay={getDay}
         setGetDay={setGetDay}
-
+        loading={loading}
       />
     );
 

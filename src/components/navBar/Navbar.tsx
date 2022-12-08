@@ -7,9 +7,12 @@ import NavModal from "./NavModal";
 interface MyProps {
   data: any;
   setData: any;
+  setUserBookings: any,
+  userBookings: any
+  setLoading: any
 }
 // Pass data to app.tsx
-const Navbar = ({ setData, data }: MyProps) => {
+const Navbar = ({ setData, data, setLoading }: MyProps) => {
   //States
   const [handleModal, setHandleModal] = useState<boolean>(false);
 
@@ -32,6 +35,7 @@ const Navbar = ({ setData, data }: MyProps) => {
         setData={setData}
         setHandleModal={setHandleModal}
         handleModal={handleModal}
+        setLoading={setLoading}
       />
       <div className="signInContainer">
         <p
