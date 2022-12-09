@@ -2,7 +2,7 @@
 
 log=log_file.txt
 
-# npm test
+# /////////////////////////////////// PULL FROM REPO ////////////////////////////////////////////
 
 git pull
 
@@ -15,6 +15,8 @@ git pull
 cd .. 
 
 printf "\nPull for backend completed" >> $log
+
+# /////////////////////////////////// BUILD IMAGES / CONTAINERS ////////////////////////////////////////////
 
 open http://localhost:3000
 
@@ -32,6 +34,9 @@ fi
 
 # Confirm tests passed
 printf "\nTests completed" >> $log
+
+
+# /////////////////////////////////// INSTRUCTIONS ////////////////////////////////////////////
 
 #!How to run this script
     # in root directory 
