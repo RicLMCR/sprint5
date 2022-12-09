@@ -26,7 +26,7 @@
   },
   "scripts": {
     "start": "CI=true npm test && npm run start1",
-    "start1": "npm-run-all testauto --parallel nodestart startsolo",
+    "start1": "npm-run-all --parallel nodestart startsolo",
     "nodestart": "cd ./backend && nodemon index.ts",
     "startsolo": "react-scripts start",
     "build": "react-scripts build",

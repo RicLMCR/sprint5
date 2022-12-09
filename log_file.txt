@@ -1,5 +1,4 @@
 
-Pull for backend completed
 Docker Compose has completed
 Tests completed
 Pull for backend completed
