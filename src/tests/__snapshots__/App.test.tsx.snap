@@ -13,6 +13,7 @@ exports[`Tests that the app its self renders correctly App renders correctly 1`]
       <img
         alt="logo"
         className="logo-nav"
+        src="Store86-logo.png"
       />
     </div>
     <h2
